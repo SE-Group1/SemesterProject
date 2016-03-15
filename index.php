@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>LinkedIn 2.0</title>
+        <title>HookedUp</title>
     </head>
 <body>
-    <p>This is gonna be a <i>pretty</i> sweet webpage.</p>
+    <h1>HookedUp</h1>
+    <h3>Currently under construction</h3>
 </body>
