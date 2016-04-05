@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Case</title>
+  <title>HookedUp</title>
     <style>
-    .navbar navbar-inverse:hover {
-        
-    }
-    
-        .logo {
+        .logo-top {
             display: block;
-            margin-right: auto;
-            margin-left: auto;
-             
+            margin: 50px auto 0 auto;
+        }
+        .logo-bottom {
+            display: block;
+            margin: 0 auto 0 auto;
         }
     </style>
   <meta charset="utf-8">
@@ -29,7 +27,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
+      <!--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#">Page 1-1</a></li>
           <li><a href="#">Page 1-2</a></li>
@@ -37,38 +35,26 @@
         </ul>
       </li>
       <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
+      <li><a href="#">Page 3</a></li>-->
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+    <!--<ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
+    </ul>-->
   </div>
 </nav>
     
-    
-
 <div class="container">
-    <div class="logo"><div><img src="hooked.png" class="logo"></div>
-    <div><img src="up.png" class="logo"></div></div>
+    <div class="logo"><div><img src="hooked.png" class="logo-top"></div>
+    <div><img src="up.png" class="logo-bottom"></div></div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-login">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <a href="#" class="active" id="login-form-link">Login</a>
-                            </div>
-                            <div class="col-xs-6">
-                                <a href="#" id="register-form-link">Register</a>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
+                    <hr>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                            <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
@@ -79,13 +65,23 @@
                                         <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                                         <label for="remember"> Remember Me</label>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="row">
-
-  
-<div class="container">
-  <h3></h3>
-  <p></p>
+                                </div>
+                                <div class="col-lg-6 col-lg-offset-3">
+                                    <div class="form-group-lg">
+                                        <button type="submit" class="btn form-control btn-primary">Sign in</button>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group text-center">
+                                        <h6>Not a member? <a href="register.php">Create an account.</a></h6>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>
