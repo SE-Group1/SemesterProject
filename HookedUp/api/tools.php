@@ -18,14 +18,16 @@ function mysqlConnect() {
  * Returns GET data safely scrubbed using htmlspecialchars()
  */
 function getGETSafe($key) {
-    return htmlspecialchars($_GET['$key']);
+    $val = htmlspecialchars($_GET[$key]);
+    return empty($val) ? NULL : $val;
 }
 
 /**
  * Returns POST data safely scrubbed using htmlspecialchars()
  */
 function getPOSTSafe($key) {
-    return htmlspecialchars($_POST['$key']);
+    $val = htmlspecialchars($_POST[$key]);
+    return empty($val) ? NULL : $val;
 }
 
 /**
