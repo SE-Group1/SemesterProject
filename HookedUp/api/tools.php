@@ -15,6 +15,20 @@ function mysqlConnect() {
 }
 
 /**
+ * Returns GET data safely scrubbed using htmlspecialchars()
+ */
+function getGETSafe($key) {
+    return htmlspecialchars($_GET['$key']);
+}
+
+/**
+ * Returns POST data safely scrubbed using htmlspecialchars()
+ */
+function getPOSTSafe($key) {
+    return htmlspecialchars($_POST['$key']);
+}
+
+/**
  * Returns json with an error message
  */
 function fail($error) {
