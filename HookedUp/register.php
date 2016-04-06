@@ -7,6 +7,17 @@
             margin: 50px auto 0 auto;
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            $("#register-form").submit(function(e) {
+                e.preventDefault();
+                
+                $.post('api/auth/register.php', $("#register-form").serialize(), function(data) {
+                    console.log(data);
+                });
+            })
+        });
+    </script>
 </head>
 <body>
 
@@ -23,7 +34,7 @@
                 <hr>
                 <div class="panel-body">
                     <div class="row">
-                        <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                        <form id="register-form"  role="form" style="display: block;">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">

@@ -3,7 +3,7 @@
     
     $conn = mysqlConnect();
     
-    $query = "SELECT * FROM user";
+    $query = "SELECT * FROM post";
     $stmt = $conn->prepare($query);
     if (!$stmt) {
         die("Prepare failed: ".$conn->error);

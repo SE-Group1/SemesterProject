@@ -20,9 +20,9 @@
         die("Prepare failed: ".$conn->error);
     }
     
-    $hashedPass = password_hash($password);
+    $hashedPass = password_hash($password, PASSWORD_DEFAULT);
     
-    $stmt->bind_param("ssssssssss", $username, $hashedPass, $firstName, $lastName, $email, $phoneNumber, $birthday, $secretQuestion, $secretAnswer);
+    $stmt->bind_param("sssssssss", $username, $hashedPass, $firstName, $lastName, $email, $phoneNumber, $birthday, $secretQuestion, $secretAnswer);
     
     if (!$stmt->execute()) {
         die("Execute failed: ".$stmt->error);
