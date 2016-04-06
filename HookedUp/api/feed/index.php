@@ -1,5 +1,5 @@
 <?php
-    require '../tools.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/api/tools.php';
     
     $conn = mysqlConnect();
     

@@ -3,14 +3,6 @@
 <head>
     <?php require 'links.php'; ?>
     <style>
-        .logo-top {
-            display: block;
-            margin: 50px auto 0 auto;
-        }
-        .logo-bottom {
-            display: block;
-            margin: 0 auto 0 auto;
-        }
     </style>
     <script>
         $(document).ready(function() {
