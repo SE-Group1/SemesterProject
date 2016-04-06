@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Returns a mysqli object with a valid connection to the server's database
+ */
 function mysqlConnect() {
     $servername = "127.0.0.1";
     $username = "root";

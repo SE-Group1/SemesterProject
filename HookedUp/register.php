@@ -13,8 +13,14 @@
                 e.preventDefault();
                 
                 $.post('api/auth/register.php', $("#register-form").serialize(), function(data) {
-                    console.log(data);
-                });
+                    if(!data || !data.success) {
+                        console.log(data);
+                        //TODO: handle error
+                        return;
+                    }
+                    
+                    window.location.href = "login.php";
+                }, 'json');
             })
         });
     </script>
