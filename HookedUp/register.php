@@ -9,17 +9,23 @@
     </style>
     <script>
         $(document).ready(function() {
-            $("#register-form").submit(function(e) {
+            $("#registerForm").submit(function(e) {
                 e.preventDefault();
                 
-                $.post('api/auth/register.php', $("#register-form").serialize(), function(data) {
+                $.post('api/auth/register.php', $("#registerForm").serialize(), function(data) {
                     if(!data || !data.success) {
                         console.log(data);
-                        //TODO: handle error
+                        $("#errorMessage")
+                            .html(data.error)
+                            .slideDown("fast")
+                            .delay(10000)
+                            .slideUp(1000);
+                        $("#password").val("");
+                        $("#username").focus().select();
                         return;
                     }
                     
-                    window.location.href = "login.php";
+                    window.location.href = "login.php?registered=true";
                 }, 'json');
             })
         });
@@ -40,7 +46,7 @@
                 <hr>
                 <div class="panel-body">
                     <div class="row">
-                        <form id="register-form"  role="form" style="display: block;">
+                        <form id="registerForm"  role="form" style="display: block;">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="firstName">First name</label>
@@ -58,6 +64,7 @@
                                     <label for="password">Password <small>(at least 8 characters)</small></label>
                                     <input type="password" name="password" id="password" class="form-control" placeholder="Password" pattern=".{8,}" required>
                                 </div>
+                                <div id="errorMessage" class="form-group alert alert-danger text-center" role="alert" hidden></div>
                             </div>
                             <div class="col-lg-6 col-lg-offset-3">
                                 <div class="form-group text-center">

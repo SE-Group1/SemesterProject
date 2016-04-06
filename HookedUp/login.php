@@ -12,6 +12,13 @@
             margin: 0 auto 0 auto;
         }
     </style>
+    <script>
+        $(document).ready(function() {
+            if(<?= $_GET['registered']; ?>) {
+                $("#successMessage").show();
+            } 
+        });
+    </script>
 </head>
 <body>
 
@@ -46,6 +53,12 @@
                                     <hr>
                                     <div class="form-group text-center">
                                         <h6>Not a member? <a href="register.php">Create an account.</a></h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div id="successMessage" class="form-group alert alert-success text-center" role="alert" hidden>
+                                        Congratulations, you're now a part of HookedUp! <br>
+                                        Try signing in.
                                     </div>
                                 </div>
                             </form>
