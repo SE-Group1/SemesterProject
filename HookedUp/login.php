@@ -14,9 +14,28 @@
     </style>
     <script>
         $(document).ready(function() {
-            if(<?= $_GET['registered']; ?>) {
+            <?php if(isset($_GET['registered'])) { ?>
                 $("#successMessage").show();
-            } 
+            <?php } ?>
+            
+            $("#loginForm").submit(function(e) {
+                e.preventDefault();
+                
+                $.post('api/auth/login.php', $(this).serialize(), function(data) {
+                    if(!data || !data.success) {
+                        console.log(data);
+                        $("#errorMessage")
+                            .html(data.error)
+                            .slideDown("fast");
+                        $("#password").val("");
+                        $("#username").focus().select();
+                        return;
+                    }
+                    
+                    window.location.href = "home.php";
+                    
+                }, 'json');
+            });
         });
     </script>
 </head>
@@ -33,7 +52,7 @@
                     <hr>
                     <div class="panel-body">
                         <div class="row">
-                            <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                            <form id="loginForm" href="" role="form" style="display: block;">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
@@ -60,6 +79,7 @@
                                         Congratulations, you're now a part of HookedUp! <br>
                                         Try signing in.
                                     </div>
+                                    <div id="errorMessage" class="form-group alert alert-danger text-center" role="alert" hidden></div>
                                 </div>
                             </form>
                         </div>

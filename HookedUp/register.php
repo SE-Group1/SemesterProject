@@ -17,9 +17,7 @@
                         console.log(data);
                         $("#errorMessage")
                             .html(data.error)
-                            .slideDown("fast")
-                            .delay(10000)
-                            .slideUp(1000);
+                            .slideDown("fast");
                         $("#password").val("");
                         $("#username").focus().select();
                         return;
