@@ -43,19 +43,20 @@ CREATE TABLE `user` (
     secretQuestion varchar(50),
     secretAnswer varchar(12),
     profileImageId varchar(36),
+    sessionId varchar(128),
     /* priveleges, sessionId */
     FOREIGN KEY (profileImageId) REFERENCES image (id)
 ) ENGINE=INNODB;
 
 /* Note: we can use UUID() to generate UUIDs with SQL -- need hardcoded ones for the seed data though */
 INSERT INTO `user` VALUES
-    ('User-1', DEFAULT, 'User-1', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Frodo',  'Baggins',  'frodo.baggins@theshire.net', '111-111-1111', NULL, NULL, NULL, 'Image-1'),
-    ('User-2', DEFAULT, 'User-2', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Peyton', 'Manning',  'bestqbevernohgh@aol.com',    '222-222-2222', NULL, NULL, NULL, 'Image-2'),
-    ('User-3', DEFAULT, 'User-3', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Angus',  'Young',    'angusyoung@hell.com',        '333-333-3333', NULL, NULL, NULL, 'Image-3'),
-    ('User-4', DEFAULT, 'User-4', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Adele',  'Adkins',   'hello@theotherside.com',     '444-444-4444', NULL, NULL, NULL, 'Image-4'),
-    ('User-5', DEFAULT, 'User-5', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Steve',  'Jobs',     'stevejobs@outlook.com',      '555-555-5555', NULL, NULL, NULL, 'Image-5'),
-    ('User-6', DEFAULT, 'User-6', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Ryan',   'Reynolds', 'dead@pool.com',              '666-666-6666', NULL, NULL, NULL, 'Image-6'),
-    ('User-7', DEFAULT, 'User-7', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Papa',   'John',     'papajohn@papajohns.com',     '777-777-7777', NULL, NULL, NULL, 'Image-7');
+    ('User-1', DEFAULT, 'User-1', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Frodo',  'Baggins',  'frodo.baggins@theshire.net', '111-111-1111', NULL, NULL, NULL, 'Image-1', NULL),
+    ('User-2', DEFAULT, 'User-2', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Peyton', 'Manning',  'bestqbevernohgh@aol.com',    '222-222-2222', NULL, NULL, NULL, 'Image-2', NULL),
+    ('User-3', DEFAULT, 'User-3', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Angus',  'Young',    'angusyoung@hell.com',        '333-333-3333', NULL, NULL, NULL, 'Image-3', NULL),
+    ('User-4', DEFAULT, 'User-4', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Adele',  'Adkins',   'hello@theotherside.com',     '444-444-4444', NULL, NULL, NULL, 'Image-4', NULL),
+    ('User-5', DEFAULT, 'User-5', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Steve',  'Jobs',     'stevejobs@outlook.com',      '555-555-5555', NULL, NULL, NULL, 'Image-5', NULL),
+    ('User-6', DEFAULT, 'User-6', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Ryan',   'Reynolds', 'dead@pool.com',              '666-666-6666', NULL, NULL, NULL, 'Image-6', NULL),
+    ('User-7', DEFAULT, 'User-7', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Papa',   'John',     'papajohn@papajohns.com',     '777-777-7777', NULL, NULL, NULL, 'Image-7', NULL);
     
 CREATE TABLE `message` (
     id varchar(36) NOT NULL PRIMARY KEY,
