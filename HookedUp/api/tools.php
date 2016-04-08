@@ -36,12 +36,11 @@ function getPOSTSafe($key) {
 /**
  * Returns json with an error message
  */
-function fail($error) {
+function failure($error) {
     $data = array();
     $data['success'] = false;
     $data['error'] = $error;
-    echo json_encode($data);
-    exit();
+    exit(json_encode($data));
 }
 
 /**
@@ -51,8 +50,7 @@ function success($resultArr = array()) {
     $data = array();
     $data['success'] = true;
     $data['result'] = $resultArr;
-    echo json_encode($data);
-    exit();
+    exit(json_encode($data));
 }
 
 /**

@@ -1,24 +1,37 @@
 <?php
     require $_SERVER['DOCUMENT_ROOT'] . '/api/tools.php';
     
+    $username = getPOSTSafe('username');
+    $password = getPOSTSafe('password');
+    
     $conn = mysqlConnect();
     
-    $query = "SELECT * FROM user";
+    $query = "SELECT password FROM user WHERE username = ?";
     $stmt = $conn->prepare($query);
     if (!$stmt) {
-        die("Prepare failed: ".$conn->error);
+        failure("Prepare failed: ".$conn->error);
     }
     
+    $stmt->bind_param("s", $username);
+    
     if (!$stmt->execute()) {
-        die("Execute failed: ".$stmt->error);
+        failure("Execute failed: ".$stmt->error);
     }
-
+    
     $result = $stmt->get_result();
-
-    $array = array();
-    while($row = $result->fetch_assoc()) {
-        $array[] = $row;
+    $user = $result->fetch_assoc();
+    
+    if(!$user) {
+        failure("Incorrect username or password");
     }
+    
+    $hashedPassword = $user['password'];
+    
+    if(!password_verify($password, $hashedPassword)) {
+        failure("Incorrect username or password");
+    }
+    
+    //TODO: start session
 
-    success($array);
+    success();
 ?>
