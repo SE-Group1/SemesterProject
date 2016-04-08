@@ -24,12 +24,12 @@
     //Prepare the query using the mysqli connection (returns a mysqli_stmt object instance).
     $stmt = $conn->prepare($query);
     if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
+        failure("Prepare failed: " . $conn->error);
     }
     
     //Execute the query (this is when the query is actually run in mysql).
     if (!$stmt->execute()) {
-        die("Execute failed: " . $stmt->error);
+        failure("Execute failed: " . $stmt->error);
     }
     
     //Get the result of the execution (returns a mysqli_result object instance).
@@ -59,34 +59,35 @@
     //Prepare the query using the mysqli connection (returns a mysqli_stmt object instance).
     $stmt = $conn->prepare($query);
     if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
+        failure("Prepare failed: " . $conn->error);
     }
     
     //Execute the query (this is when the query is actually run in mysql).
     if (!$stmt->execute()) {
-        die("Execute failed: " . $stmt->error);
+        failure("Execute failed: " . $stmt->error);
     }
     
     //Store the result for use by mysqli 
     if (!$stmt->store_result()) {
-        die("Store failed: " . $stmt->error);
+        failure("Store failed: " . $stmt->error);
     }
     
     //Tell mysqli to fetch the first row (there should only be one).
     if (!$stmt->fetch()) {
-        die("Fetch failed: " . $stmt->error);
+        failure("Fetch failed: " . $stmt->error);
     }
-    
     
     //Get the result of the execution (returns a mysqli_result object instance).
     $result = $stmt->get_result();
-
-    //Create a PHP array and iterate through the rows, fetching associate arrays for each row and adding them to the list
-    $array = array();
-    while($row = $result->fetch_assoc()) {
-        $array[] = $row;
+    
+    //Get an associate array for the user
+    $user = $result->fetch_assoc();
+    
+    //If the array is null, there is no user in the database with that id
+    if(!$user) {
+        failure("No user for id: " . $id);
     }
-
-    //Return the list using tools.success (this will encode the JSON for you).
-    success($array);
+    
+    //Return the user array
+    success($user);
 ?>
