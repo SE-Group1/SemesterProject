@@ -49,13 +49,13 @@ CREATE TABLE `user` (
 
 /* Note: we can use UUID() to generate UUIDs with SQL -- need hardcoded ones for the seed data though */
 INSERT INTO `user` VALUES
-    ('User-1', DEFAULT, 'User-1', '$2y$10$cDYAjrH6f/Q9SMjd5/EiNOxWzG1M/3BbNQO3NNU/0WBWzs8IxpAoe', 'Frodo',  'Baggins',  'frodo.baggins@theshire.net', '111-111-1111', NULL, NULL, NULL, 'Image-1'),
-    ('User-2', DEFAULT, 'User-2', '$2y$10$cDYAjrH6f/Q9SMjd5/EiNOxWzG1M/3BbNQO3NNU/0WBWzs8IxpAoe', 'Peyton', 'Manning',  'bestqbevernohgh@aol.com',    '222-222-2222', NULL, NULL, NULL, 'Image-2'),
-    ('User-3', DEFAULT, 'User-3', '$2y$10$cDYAjrH6f/Q9SMjd5/EiNOxWzG1M/3BbNQO3NNU/0WBWzs8IxpAoe', 'Angus',  'Young',    'angusyoung@hell.com',        '333-333-3333', NULL, NULL, NULL, 'Image-3'),
-    ('User-4', DEFAULT, 'User-4', '$2y$10$cDYAjrH6f/Q9SMjd5/EiNOxWzG1M/3BbNQO3NNU/0WBWzs8IxpAoe', 'Adele',  'Adkins',   'hello@theotherside.com',     '444-444-4444', NULL, NULL, NULL, 'Image-4'),
-    ('User-5', DEFAULT, 'User-5', '$2y$10$cDYAjrH6f/Q9SMjd5/EiNOxWzG1M/3BbNQO3NNU/0WBWzs8IxpAoe', 'Steve',  'Jobs',     'stevejobs@outlook.com',      '555-555-5555', NULL, NULL, NULL, 'Image-5'),
-    ('User-6', DEFAULT, 'User-6', '$2y$10$cDYAjrH6f/Q9SMjd5/EiNOxWzG1M/3BbNQO3NNU/0WBWzs8IxpAoe', 'Ryan',   'Reynolds', 'dead@pool.com',              '666-666-6666', NULL, NULL, NULL, 'Image-6'),
-    ('User-7', DEFAULT, 'User-7', '$2y$10$cDYAjrH6f/Q9SMjd5/EiNOxWzG1M/3BbNQO3NNU/0WBWzs8IxpAoe', 'Papa',   'John',     'papajohn@papajohns.com',     '777-777-7777', NULL, NULL, NULL, 'Image-7');
+    ('User-1', DEFAULT, 'User-1', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Frodo',  'Baggins',  'frodo.baggins@theshire.net', '111-111-1111', NULL, NULL, NULL, 'Image-1'),
+    ('User-2', DEFAULT, 'User-2', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Peyton', 'Manning',  'bestqbevernohgh@aol.com',    '222-222-2222', NULL, NULL, NULL, 'Image-2'),
+    ('User-3', DEFAULT, 'User-3', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Angus',  'Young',    'angusyoung@hell.com',        '333-333-3333', NULL, NULL, NULL, 'Image-3'),
+    ('User-4', DEFAULT, 'User-4', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Adele',  'Adkins',   'hello@theotherside.com',     '444-444-4444', NULL, NULL, NULL, 'Image-4'),
+    ('User-5', DEFAULT, 'User-5', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Steve',  'Jobs',     'stevejobs@outlook.com',      '555-555-5555', NULL, NULL, NULL, 'Image-5'),
+    ('User-6', DEFAULT, 'User-6', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Ryan',   'Reynolds', 'dead@pool.com',              '666-666-6666', NULL, NULL, NULL, 'Image-6'),
+    ('User-7', DEFAULT, 'User-7', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Papa',   'John',     'papajohn@papajohns.com',     '777-777-7777', NULL, NULL, NULL, 'Image-7');
     
 CREATE TABLE `message` (
     id varchar(36) NOT NULL PRIMARY KEY,
