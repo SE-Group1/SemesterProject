@@ -59,3 +59,8 @@ function success($resultArr = array()) {
 function isLoggedIn() {
     return isset($_SESSION['userId']);
 }
+
+function userProperties($root = "user") {
+    return $root.".id, ".$root.".createdAt, ".$root.".username, ".$root.".firstName, ".$root.".lastName, "
+        .$root.".email, ".$root.".phoneNumber, ".$root.".birthday, ".$root.".profileImageId";
+}

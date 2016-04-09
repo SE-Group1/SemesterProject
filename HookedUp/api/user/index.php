@@ -9,8 +9,7 @@
                 failure("id required arg");
             }
             
-            $query = "SELECT id, createdAt, username, firstName, lastName, email, phoneNumber, birthday, profileImageId
-             FROM user WHERE id = ?";
+            $query = "SELECT ".userProperties()." FROM user WHERE id = ?";
             if (!$stmt = $conn->prepare($query)) {
                 failure("Prepare failed: " . $conn->error);
             }

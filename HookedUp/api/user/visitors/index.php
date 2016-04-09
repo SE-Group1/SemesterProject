@@ -10,7 +10,9 @@
             failure("userId required arg");
         }
         
-        $query = "SELECT * FROM profileVisit WHERE destinationUserId = ?";
+        $query = "SELECT ".userProperties().", profileVisit.createdAt AS visitedAt FROM user, profileVisit 
+            WHERE profileVisit.destinationUserId = ? && profileVisit.originUserId = user.id
+            ORDER BY profileVisit.createdAt DESC";
         if (!$stmt = $conn->prepare($query)) {
             failure("Prepare failed: " . $conn->error);
         }

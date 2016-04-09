@@ -10,7 +10,9 @@
             failure("userId required arg");
         }
         
-        $query = "SELECT * FROM follower WHERE destinationUserId = ?";
+        $query = "SELECT ".userProperties().", follower.createdAt AS followedAt FROM user, follower 
+            WHERE follower.destinationUserId = ? && follower.originUserId = user.id 
+            ORDER By follower.createdAt DESC";
         if (!$stmt = $conn->prepare($query)) {
             failure("Prepare failed: " . $conn->error);
         }
