@@ -6,7 +6,7 @@
     
     $conn = mysqlConnect();
     
-    $query = "SELECT username, firstName, lastName FROM user WHERE id = ?";
+    $query = "SELECT username, firstName, lastName, sessionId FROM user WHERE id = ?";
     
     $stmt = $conn->prepare($query);
     if (!$stmt) {

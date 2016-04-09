@@ -21,9 +21,7 @@
         $result = curl_post($url, $fields);
         
         if(!$result['result']) {
-            return "Not logged in";
-        } else {
-            return "Logged in";
+            header("Location: http://" . $_SERVER['HTTP_HOST']);
         }
     }
     
