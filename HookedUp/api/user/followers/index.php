@@ -10,7 +10,7 @@
             failure("userId required arg");
         }
         
-        $query = "SELECT * FROM profileVisit WHERE destinationUserId = ?";
+        $query = "SELECT * FROM follower WHERE destinationUserId = ?";
         if (!$stmt = $conn->prepare($query)) {
             failure("Prepare failed: " . $conn->error);
         }
