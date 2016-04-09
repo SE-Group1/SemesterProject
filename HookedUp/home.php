@@ -1,3 +1,6 @@
+<?php require 'tools.php'; 
+    $loggedIn = requireLoggedIn();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +21,9 @@
 <?php require 'navbar.php'; ?>
 
 <div class="container">
-    <p id="result"></p>
+    <p id="result">
+        <?= $loggedIn; ?>
+    </p>
 </div>
 
 </body>

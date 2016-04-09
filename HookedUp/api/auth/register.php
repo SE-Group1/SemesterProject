@@ -25,7 +25,7 @@
     $stmt->bind_param("sssssssss", $username, $hashedPass, $firstName, $lastName, $email, $phoneNumber, $birthday, $secretQuestion, $secretAnswer);
     
     if (!$stmt->execute()) {
-        die("Execute failed: ".$stmt->error);
+        die("Execute failed: " . $stmt->error);
     }
     
     success();
