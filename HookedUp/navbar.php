@@ -5,6 +5,8 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="posts.php">Posts</a></li>
+        <li class="active"><a href="Editprofile.php">Edit Profile</a></li>
       <!--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#">Page 1-1</a></li>
