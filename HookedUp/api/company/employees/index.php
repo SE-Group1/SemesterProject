@@ -13,37 +13,14 @@
             $query = "SELECT * FROM employment 
                 WHERE companyId = ? && endedAt IS NULL  
                 ORDER BY startedAt DESC";
-            if (!$stmt = $conn->prepare($query)) {
-                failure("Prepare failed: " . $conn->error);
-            }
-            
-            $stmt->bind_param("s", $id);
-            if (!$stmt->execute()) {
-                failure("Execute failed: " . $stmt->error);
-            }
-            
-            $result = $stmt->get_result();
-            $employments = array();
-            
-            while ($employment = $result->fetch_assoc()) {
-                
+            $employments = exec_stmt($query, "s", $id);
+            foreach ($employments as $key => $employment) {
                 $query = "SELECT ".userProperties()." FROM user WHERE id = ?";
-                if (!$stmt = $conn->prepare($query)) {
-                    failure("Prepare failed: " . $conn->error);
-                }
-                
-                $stmt->bind_param("s", $employment['userId']);
-                if (!$stmt->execute()) {
-                    failure("Execute failed: " . $stmt->error);
-                }
-                
-                $u_result = $stmt->get_result();
-                if ($user = $u_result->fetch_assoc()) {
+                if($user = reset(exec_stmt($query, "s", $employment['userId']))) {
                     $employment['user'] = $user;
                     unset($employment['userId']);
+                    $employments[$key] = $employment;
                 }
-                
-                $employments[] = $employment;
             }
             
             success($employments);

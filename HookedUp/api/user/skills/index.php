@@ -6,42 +6,19 @@
     
     switch ($method) {
         case 'GET':    
-            if (!$userId = getGETSafe('userId')) {
+            if (!$id = getGETSafe('userId')) {
                 failure("userId required arg");
             }
             
-            $query = "SELECT * FROM skill WHERE originUserId = ?";
-            if (!$stmt = $conn->prepare($query)) {
-                failure("Prepare failed: " . $conn->error);
-            }
-            
-            $stmt->bind_param("s", $userId);
-            if (!$stmt->execute()) {
-                failure("Execute failed: " . $stmt->error);
-            }
-            
-            $result = $stmt->get_result();
-            $skills = array();
-            while ($skill = $result->fetch_assoc()) {
-                $query = "SELECT * FROM endorsement WHERE skillId = ?";
-                if (!$stmt = $conn->prepare($query)) {
-                    failure("Prepare failed: " . $conn->error);
-                }
-                
-                $stmt->bind_param("s", $skill['id']);
-                if (!$stmt->execute()) {
-                    failure("Execute failed: " . $stmt->error);
-                }
-                
-                $e_result = $stmt->get_result();
-                $endorsements = array();
-                while ($endorsement = $e_result->fetch_assoc()) {
-                    $endorsements[] = $endorsement;
-                }
+            $query = "SELECT * FROM skill WHERE originUserId = ? ORDER BY name";
+            $skills = exec_stmt($query, "s", $id);
+            foreach($skills as $key => $skill) {
+                $query = "SELECT * FROM endorsement WHERE skillId = ? ORDER BY createdAt DESC";
+                $endorsements = exec_stmt($query, "s", $skill['id']);
                 $skill['endorsements'] = $endorsements;
-                
-                $skills[] = $skill;
-            }
+                $skills[$key] = $skill;
+            }              
+          
             success($skills);
             break;
         case 'POST':
