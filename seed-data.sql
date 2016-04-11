@@ -13,22 +13,30 @@ DROP TABLE IF EXISTS `companyVisit`;
 DROP TABLE IF EXISTS `company`;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `image`;
+DROP TABLE IF EXISTS `file`;
+
+CREATE TABLE `file` (
+    id varchar(36) NOT NULL PRIMARY KEY,
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    path varchar(60) NOT NULL UNIQUE
+) ENGINE=INNODB;
 
 CREATE TABLE `image` (
     id varchar(36) NOT NULL PRIMARY KEY,
-    path varchar(40) NOT NULL UNIQUE
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    path varchar(60) NOT NULL UNIQUE
 ) ENGINE=INNODB;
 
 INSERT INTO `image` VALUES
-    ('Image-1', 'http://www.thelandofshadow.com/wp-content/uploads/2015/09/FrodoTurns.jpg'),
-    ('Image-2', 'http://i1.kym-cdn.com/entries/icons/original/000/016/212/manning.png'),
-    ('Image-3', 'http://rs862.pbsrc.com/albums/ab186/samus_69/angus.gif~c200'),
-    ('Image-4', 'http://culturainternet.com/wp-content/uploads/2012/06/Adele-200x200.jpg'),
-    ('Image-5', 'http://cdn.macrumors.com/article-new/2015/02/Steve-Jobs-200x200.png'),
-    ('Image-6', 'http://s3-us-west-1.amazonaws.com/blogs-prod-media/us/uploads/2016/02/14085217/Ryan-Reynolds-daughter-200x200.jpg'),
-    ('Image-7', 'http://www.entrepreneurhof.com/img/john_schnatter.jpg'),
-    ('Image-8', 'https://img.grouponcdn.com/coupons/s6CAoyNusnjdz9ftWFXeP9/order_papajohns_com-500x500/v1/t200x200.png'),
-    ('Image-9', 'http://www.allaboutjazz.com/photos/news/applelogo.png');
+    ('Image-1', DEFAULT, 'http://www.thelandofshadow.com/wp-content/uploads/2015/09/FrodoTurns.jpg'),
+    ('Image-2', DEFAULT, 'http://i1.kym-cdn.com/entries/icons/original/000/016/212/manning.png'),
+    ('Image-3', DEFAULT, 'http://rs862.pbsrc.com/albums/ab186/samus_69/angus.gif~c200'),
+    ('Image-4', DEFAULT, 'http://culturainternet.com/wp-content/uploads/2012/06/Adele-200x200.jpg'),
+    ('Image-5', DEFAULT, 'http://cdn.macrumors.com/article-new/2015/02/Steve-Jobs-200x200.png'),
+    ('Image-6', DEFAULT, 'http://s3-us-west-1.amazonaws.com/blogs-prod-media/us/uploads/2016/02/14085217/Ryan-Reynolds-daughter-200x200.jpg'),
+    ('Image-7', DEFAULT, 'http://www.entrepreneurhof.com/img/john_schnatter.jpg'),
+    ('Image-8', DEFAULT, 'https://img.grouponcdn.com/coupons/s6CAoyNusnjdz9ftWFXeP9/order_papajohns_com-500x500/v1/t200x200.png'),
+    ('Image-9', DEFAULT, 'http://www.allaboutjazz.com/photos/news/applelogo.png');
 
 CREATE TABLE `user` (
     id varchar(36) NOT NULL PRIMARY KEY,
@@ -42,21 +50,46 @@ CREATE TABLE `user` (
     birthday datetime,
     secretQuestion varchar(50),
     secretAnswer varchar(12),
+    creditCardNumber char(16),
+    isPremium bool NOT NULL DEFAULT FALSE,
     profileImageId varchar(36),
+    resumeFileId varchar(36),
     sessionId varchar(128),
     /* priveleges, sessionId */
-    FOREIGN KEY (profileImageId) REFERENCES image (id)
+    FOREIGN KEY (profileImageId) REFERENCES image (id),
+    FOREIGN KEY (resumeFileId) REFERENCES file (id)
 ) ENGINE=INNODB;
 
 /* Note: we can use UUID() to generate UUIDs with SQL -- need hardcoded ones for the seed data though */
 INSERT INTO `user` VALUES
-    ('User-1', DEFAULT, 'User-1', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Frodo',  'Baggins',  'frodo.baggins@theshire.net', '111-111-1111', NULL, NULL, NULL, 'Image-1', NULL),
-    ('User-2', DEFAULT, 'User-2', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Peyton', 'Manning',  'bestqbevernohgh@aol.com',    '222-222-2222', NULL, NULL, NULL, 'Image-2', NULL),
-    ('User-3', DEFAULT, 'User-3', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Angus',  'Young',    'angusyoung@hell.com',        '333-333-3333', NULL, NULL, NULL, 'Image-3', NULL),
-    ('User-4', DEFAULT, 'User-4', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Adele',  'Adkins',   'hello@theotherside.com',     '444-444-4444', NULL, NULL, NULL, 'Image-4', NULL),
-    ('User-5', DEFAULT, 'User-5', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Steve',  'Jobs',     'stevejobs@outlook.com',      '555-555-5555', NULL, NULL, NULL, 'Image-5', NULL),
-    ('User-6', DEFAULT, 'User-6', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Ryan',   'Reynolds', 'dead@pool.com',              '666-666-6666', NULL, NULL, NULL, 'Image-6', NULL),
-    ('User-7', DEFAULT, 'User-7', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Papa',   'John',     'papajohn@papajohns.com',     '777-777-7777', NULL, NULL, NULL, 'Image-7', NULL);
+    ('User-1', DEFAULT, 'User-1', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Frodo',  'Baggins',  'frodo.baggins@theshire.net', '111-111-1111', NULL, NULL, NULL, NULL, FALSE, 'Image-1', NULL, NULL),
+    ('User-2', DEFAULT, 'User-2', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Peyton', 'Manning',  'bestqbevernohgh@aol.com',    '222-222-2222', NULL, NULL, NULL, NULL, FALSE, 'Image-2', NULL, NULL),
+    ('User-3', DEFAULT, 'User-3', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Angus',  'Young',    'angusyoung@hell.com',        '333-333-3333', NULL, NULL, NULL, NULL, FALSE, 'Image-3', NULL, NULL),
+    ('User-4', DEFAULT, 'User-4', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Adele',  'Adkins',   'hello@theotherside.com',     '444-444-4444', NULL, NULL, NULL, NULL, FALSE, 'Image-4', NULL, NULL),
+    ('User-5', DEFAULT, 'User-5', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Steve',  'Jobs',     'stevejobs@outlook.com',      '555-555-5555', NULL, NULL, NULL, NULL, FALSE, 'Image-5', NULL, NULL),
+    ('User-6', DEFAULT, 'User-6', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Ryan',   'Reynolds', 'dead@pool.com',              '666-666-6666', NULL, NULL, NULL, NULL, FALSE, 'Image-6', NULL, NULL),
+    ('User-7', DEFAULT, 'User-7', '$2y$10$zyA.69mIxRC.vQzfAFTw8OomZIedqFAYggKy9jzrECwTmz5D50iie', 'Papa',   'John',     'papajohn@papajohns.com',     '777-777-7777', NULL, NULL, NULL, NULL, FALSE, 'Image-7', NULL, NULL);
+    
+CREATE TABLE `userReport` (
+    id varchar(36) NOT NULL PRIMARY KEY,
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    originUserId varchar(36) NOT NULL,
+    destinationUserId varchar(36) NOT NULL,
+    message varchar(100) NOT NULL,
+    FOREIGN KEY (originUserId) REFERENCES user (id),
+    FOREIGN KEY (destinationUserId) REFERENCES user (id),
+    UNIQUE (originUserId, destinationUserId)
+) ENGINE=INNODB;
+
+CREATE TABLE `userBlock` (
+    id varchar(36) NOT NULL PRIMARY KEY,
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    originUserId varchar(36) NOT NULL,
+    destinationUserId varchar(36) NOT NULL,
+    FOREIGN KEY (originUserId) REFERENCES user (id),
+    FOREIGN KEY (destinationUserId) REFERENCES user (id),
+    UNIQUE (originUserId, destinationUserId)
+) ENGINE=INNODB;
     
 CREATE TABLE `message` (
     id varchar(36) NOT NULL PRIMARY KEY,
@@ -266,7 +299,7 @@ CREATE TABLE `company` (
     birthday datetime,
     managerUserId varchar(36) NOT NULL,
     profileImageId varchar(36),
-    creditCardNumber char(16) NOT NULL,
+    creditCardNumber char(16),
     isPremium bool NOT NULL DEFAULT FALSE,
     FOREIGN KEY (managerUserId) REFERENCES user (id),
     FOREIGN KEY (profileImageId) REFERENCES image (id)

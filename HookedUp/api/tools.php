@@ -11,7 +11,7 @@ function mysqlConnect() {
     
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        failure("Connection failed: " . $conn->connect_error);
     }
     
     return $conn;
@@ -59,3 +59,37 @@ function success($resultArr = array()) {
 function isLoggedIn() {
     return isset($_SESSION['userId']);
 }
+
+function userProperties($root = "user") {
+    $root = $root.".";
+    return $root."id, ".$root."createdAt, ".$root."username, ".$root."firstName, ".$root."lastName, "
+        .$root."email, ".$root."phoneNumber, ".$root."birthday, ".$root."profileImageId";
+}
+
+function companyProperties($root = "company") {
+    $root = $root.".";
+    return $root."id, ".$root."createdAt, ".$root."name, ".$root."birthday, ".$root."managerUserId ,"
+        .$root."profileImageId, ".$root."isPremium";
+}
+
+function exec_stmt($query, $type = "", $param = array()) {
+        $conn = mysqlConnect();
+        if (!$stmt = $conn->prepare($query)) {
+            failure("Prepare failed: " . $conn->error);
+        }
+        
+        $stmt->bind_param($type, $param);
+        if (!$stmt->execute()) {
+            failure("Execute failed: " . $stmt->error);
+        }
+        
+        $result = $stmt->get_result();
+        $array = array();
+        while ($row = $result->fetch_assoc()) {
+            $array[] = $row;
+        }
+        
+        return $array;         
+}
+
+?>
