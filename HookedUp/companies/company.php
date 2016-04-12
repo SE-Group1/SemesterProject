@@ -1,7 +1,20 @@
+<?php require '../tools.php';
+    
+    requireLoggedIn();
+    
+    $url = $_SERVER['HTTP_HOST'] . "/api/company/index.php";
+    $fields = array(
+        'id' => 'Company-1'
+    );
+    
+    $result = curl_get($url, $fields);
+    $company = $result['result'][0];
+    echo json_encode($company);
+?>
 <!DOCTYPE html>
 <html>
     <head> 
-        <?php require 'links.php'; ?>
+        <?php require '../links.php'; ?>
         
         <style>
             
@@ -72,7 +85,7 @@
     </head>
     
     <body>
-        <?php require 'navbar.php'; ?>
+        <?php require '../navbar.php'; ?>
         <div id="container">
             <div class="col-md-3" >
                 <img src="company.jpeg" class="img-thumbnail">
@@ -89,7 +102,7 @@
                 </div>
             </div>
                 <div class="col-md-9 row1 comp">
-                    <h2 id="company">Company</h2>
+                    <h2 id="company"><?= $company['name']; ?></h2>
                     <div class="clearfix"></div>
                     <div class="location">
                         <div>401 East West Blvd</div>

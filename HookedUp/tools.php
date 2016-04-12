@@ -48,7 +48,7 @@
         { 
             trigger_error(curl_error($ch)); 
         } 
-        curl_close($ch); 
+        curl_close($ch);
         return json_decode($result, true); 
     } 
 
@@ -71,6 +71,6 @@
         { 
             trigger_error(curl_error($ch)); 
         } 
-        curl_close($ch); 
-        return $result; 
+        curl_close($ch);
+        return json_decode($result, true);
     }
