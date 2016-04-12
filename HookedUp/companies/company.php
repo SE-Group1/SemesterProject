@@ -10,6 +10,11 @@
     $result = curl_get($url, $fields);
     $company = $result['result'][0];
     echo json_encode($company);
+    
+    /*$url1 = $_SERVER['HTTP_HOST'] . "/api/company/employees/index.php";
+    $result1 = curl_get($url1, $fields);
+    $employees = $result1['result1'][0];
+    echo json_encode($employees); */
 ?>
 <!DOCTYPE html>
 <html>
