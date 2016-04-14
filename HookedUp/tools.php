@@ -31,6 +31,14 @@
      */ 
     function curl_post($url, array $post = NULL, array $options = array()) 
     { 
+        
+        if (strpos($_SERVER['HTTP_HOST'], "localhost:8000") !== FALSE) {
+            $url = "http://localhost:8001".$url;    
+        } else {
+            $url = $_SERVER['HTTP_HOST'].$url;
+        }
+        
+        
         $defaults = array( 
             CURLOPT_POST => 1, 
             CURLOPT_HEADER => 0, 
@@ -58,6 +66,12 @@
      */ 
     function curl_get($url, array $get = NULL, array $options = array()) 
     {    
+        if (strpos($_SERVER['HTTP_HOST'], "localhost:8000") !== FALSE) {
+            $url = "http://localhost:8001".$url;    
+        } else {
+            $url = $_SERVER['HTTP_HOST'].$url;
+        }
+        
         $defaults = array( 
             CURLOPT_URL => $url. (strpos($url, '?') === FALSE ? '?' : ''). http_build_query($get), 
             CURLOPT_HEADER => 0, 

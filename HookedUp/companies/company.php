@@ -2,7 +2,7 @@
     
     requireLoggedIn();
     
-    $url = $_SERVER['HTTP_HOST'] . "/api/company/index.php";
+    $url = "/api/company/index.php";
     $fields = array(
         'id' => 'Company-1'
     );
@@ -11,6 +11,7 @@
     $company = $result['result'][0];
     echo json_encode($company);
 ?>
+
 <!DOCTYPE html>
 <html>
     <head> 
