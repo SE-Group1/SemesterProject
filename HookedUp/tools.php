@@ -12,7 +12,7 @@
             return false;
         }
         
-        $url = $_SERVER['HTTP_HOST'] . "/api/auth/authenticate.php";
+        $url = "/api/auth/authenticate.php";
         $fields = array(
             'id' => $_SESSION['id'],
             'sessionId' => session_id()
