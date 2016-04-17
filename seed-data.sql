@@ -179,20 +179,73 @@ INSERT INTO `profileVisit` VALUES
     ('ProfileVisit-14', DEFAULT, 'User-5', 'User-4'),
     ('ProfileVisit-15', DEFAULT, 'User-6', 'User-3'),
     ('ProfileVisit-16', DEFAULT, 'User-6', 'User-5');
+    
+CREATE TABLE `company` (
+    id varchar(36) NOT NULL PRIMARY KEY,
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    name varchar(100) NOT NULL,
+    birthday datetime,
+    managerUserId varchar(36) NOT NULL,
+    profileImageId varchar(36),
+    creditCardNumber char(16),
+    isPremium bool NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (managerUserId) REFERENCES user (id),
+    FOREIGN KEY (profileImageId) REFERENCES image (id)
+) ENGINE=INNODB;
+
+INSERT INTO `company` VALUES
+    ('Company-1', DEFAULT, 'Papa Johns', NULL, 'User-7', 'Image-8', '0000000000000000', false),
+    ('Company-2', DEFAULT, 'Apple',      NULL, 'User-5', 'Image-9', '1111111111111111', true);
+
+CREATE TABLE `employment` (
+    id varchar(36) NOT NULL PRIMARY KEY,
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    companyId varchar(36) NOT NULL,
+    userId varchar(36) NOT NULL,
+    startedAt datetime,
+    endedAt datetime,
+    title varchar (30),
+    FOREIGN KEY (companyId) REFERENCES company (id),
+    FOREIGN KEY (userId) REFERENCES user (id),
+    UNIQUE (companyId, userId)
+) ENGINE=INNODB;
+
+INSERT INTO `employment` VALUES
+    ('Employment-1', DEFAULT, 'Company-1', 'User-7', NULL, NULL, 'CEO'),
+    ('Employment-2', DEFAULT, 'Company-1', 'User-2', NULL, NULL, 'Commercial guy'),
+    ('Employment-3', DEFAULT, 'Company-2', 'User-5', NULL, NULL, 'CEO');
+
+CREATE TABLE `companyVisit` (
+    id varchar(36) NOT NULL PRIMARY KEY,
+    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    companyId varchar(36) NOT NULL,
+    originUserId varchar(36) NOT NULL,
+    FOREIGN KEY (companyId) REFERENCES company (id),
+    FOREIGN KEY (originUserId) REFERENCES user (id),
+    UNIQUE(companyId, originUserId)
+) ENGINE=INNODB;
+
+INSERT INTO `companyVisit` VALUES
+    ('CompanyVisit-1', DEFAULT, 'Company-1', 'User-2'),
+    ('CompanyVisit-2', DEFAULT, 'Company-1', 'User-6'),
+    ('CompanyVisit-3', DEFAULT, 'Company-2', 'User-4');
 
 CREATE TABLE `post` (
     id varchar(36) NOT NULL PRIMARY KEY,
     createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    originUserId varchar(36) NOT NULL,
+    originUserId varchar(36),
+    originCompanyId varchar(36),
     comment varchar(800) NOT NULL,
     link varchar(150),
-    FOREIGN KEY (originUserId) REFERENCES user (id)
+    FOREIGN KEY (originUserId) REFERENCES user (id),
+    FOREIGN KEY (originCompanyId) REFERENCES company (id)
 ) ENGINE=INNODB;
 
 INSERT INTO `post` VALUES
-    ('Post-1', DEFAULT, 'User-1', 'Get HookedUp, you fools!', NULL),
-    ('Post-2', DEFAULT, 'User-2', 'After a long career, which I am grateful for, I am announcing my retirement.', NULL),
-    ('Post-3', DEFAULT, 'User-6', 'Boop', NULL);
+    ('Post-1', DEFAULT, 'User-1', NULL, 'Get HookedUp, you fools!', NULL),
+    ('Post-2', DEFAULT, 'User-2', NULL, 'After a long career, which I am grateful for, I am announcing my retirement.', NULL),
+    ('Post-3', DEFAULT, 'User-6', NULL, 'Boop', NULL),
+    ('Post-4', DEFAULT, NULL, 'Company-1', 'Come get a slice today! It\'s 50% off!', NULL);
 
 CREATE TABLE `postLike` (
     id varchar(36) NOT NULL PRIMARY KEY,
@@ -293,53 +346,3 @@ INSERT INTO `endorsement` VALUES
     ('Endorsement-11', DEFAULT, 'Skill-11', 'User-3'),
     ('Endorsement-12', DEFAULT, 'Skill-12', 'User-3'),
     ('Endorsement-13', DEFAULT, 'Skill-13', 'User-3');
-
-CREATE TABLE `company` (
-    id varchar(36) NOT NULL PRIMARY KEY,
-    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    name varchar(100) NOT NULL,
-    birthday datetime,
-    managerUserId varchar(36) NOT NULL,
-    profileImageId varchar(36),
-    creditCardNumber char(16),
-    isPremium bool NOT NULL DEFAULT FALSE,
-    FOREIGN KEY (managerUserId) REFERENCES user (id),
-    FOREIGN KEY (profileImageId) REFERENCES image (id)
-) ENGINE=INNODB;
-
-INSERT INTO `company` VALUES
-    ('Company-1', DEFAULT, 'Papa Johns', NULL, 'User-7', 'Image-8', '0000000000000000', false),
-    ('Company-2', DEFAULT, 'Apple',      NULL, 'User-5', 'Image-9', '1111111111111111', true);
-
-CREATE TABLE `employment` (
-    id varchar(36) NOT NULL PRIMARY KEY,
-    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    companyId varchar(36) NOT NULL,
-    userId varchar(36) NOT NULL,
-    startedAt datetime,
-    endedAt datetime,
-    title varchar (30),
-    FOREIGN KEY (companyId) REFERENCES company (id),
-    FOREIGN KEY (userId) REFERENCES user (id),
-    UNIQUE (companyId, userId)
-) ENGINE=INNODB;
-
-INSERT INTO `employment` VALUES
-    ('Employment-1', DEFAULT, 'Company-1', 'User-7', NULL, NULL, 'CEO'),
-    ('Employment-2', DEFAULT, 'Company-1', 'User-2', NULL, NULL, 'Commercial guy'),
-    ('Employment-3', DEFAULT, 'Company-2', 'User-5', NULL, NULL, 'CEO');
-
-CREATE TABLE `companyVisit` (
-    id varchar(36) NOT NULL PRIMARY KEY,
-    createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    companyId varchar(36) NOT NULL,
-    originUserId varchar(36) NOT NULL,
-    FOREIGN KEY (companyId) REFERENCES company (id),
-    FOREIGN KEY (originUserId) REFERENCES user (id),
-    UNIQUE(companyId, originUserId)
-) ENGINE=INNODB;
-
-INSERT INTO `companyVisit` VALUES
-    ('CompanyVisit-1', DEFAULT, 'Company-1', 'User-2'),
-    ('CompanyVisit-2', DEFAULT, 'Company-1', 'User-6'),
-    ('CompanyVisit-3', DEFAULT, 'Company-2', 'User-4');
