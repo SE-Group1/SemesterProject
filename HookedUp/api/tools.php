@@ -72,13 +72,22 @@ function companyProperties($root = "company") {
         .$root."profileImageId, ".$root."isPremium";
 }
 
-function exec_stmt($query, $type = "", $param = array()) {
+function exec_stmt($query, $type = null, $param = null , $param2 = null, $param3 = null) {
         $conn = mysqlConnect();
         if (!$stmt = $conn->prepare($query)) {
             failure("Prepare failed: " . $conn->error);
         }
         
-        $stmt->bind_param($type, $param);
+        if ($type != null) {
+            if ($param3 != null) {
+                $stmt->bind_param($type, $param, $param2, $param3);        
+            } else if ($param2 != null) {
+                $stmt->bind_param($type, $param, $param2);
+            } else {
+                $stmt->bind_param($type, $param);
+            }
+        }
+        
         if (!$stmt->execute()) {
             failure("Execute failed: " . $stmt->error);
         }
@@ -91,5 +100,4 @@ function exec_stmt($query, $type = "", $param = array()) {
         
         return $array;         
 }
-
 ?>

@@ -12,6 +12,7 @@
             
             $query = "SELECT * FROM skill WHERE originUserId = ? ORDER BY name";
             $skills = exec_stmt($query, "s", $id);
+            
             foreach($skills as $key => $skill) {
                 $query = "SELECT * FROM endorsement WHERE skillId = ? ORDER BY createdAt DESC";
                 $endorsements = exec_stmt($query, "s", $skill['id']);

@@ -13,6 +13,7 @@
         $query = "SELECT ".userProperties().", profileVisit.createdAt AS visitedAt FROM user, profileVisit 
             WHERE profileVisit.destinationUserId = ? && profileVisit.originUserId = user.id
             ORDER BY profileVisit.createdAt DESC";
+            
         success(exec_stmt($query, "s", $id));
     }
 ?>  
