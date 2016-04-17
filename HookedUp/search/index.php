@@ -1,10 +1,15 @@
+<?php 
+require $_SERVER['DOCUMENT_ROOT'].'/tools.php';
+requireLoggedIn();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 <title>Search Results</title>
 </head>
 <body>
-        <?php require 'links.php'; ?>
+        <?php require '../links.php'; ?>
     <style>
         
             .btn btn-success {
@@ -27,7 +32,7 @@
             }   
 
     </style>
-<?php require 'navbar.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/navbar.php'; ?>
 <div id="nav">
 Location<br>
 Company<br>
@@ -36,24 +41,61 @@ Industry<br>
 Experience Level<br>
 <button type="button" class="btn btn-success">Filter</button> 
 </div>
-<div><center><h3>Results Found</h3></center></div>
 <?php
-
-for($i=0; $i < 10; $i++) { ?>
-    <div id="section">  
-        <div class= "col-lg-2"><br><img src = "web.png" alt= "Job Posting" style = "width:100px;height:100px;"></div>
-        <div class= <h4>Software Engineer</h4></div>
-        <div class= <small>Microsoft</small></div>
-        <div class= <sub>Greater Atlanta Area</sub></div> 
-        <button type="button" class="btn btn-success">View</button>     
-    </div>
-<?php }
-?>
+    if (!$filter = getGETSafe('filter')) { ?>
+        <div><center><h3>Need Search</h3></center></div>  
+        
+        <form action="" method="get">
+            Search:
+            <input type="search" name="filter">
+            <input type="submit">
+        </form>
+              
+    <?php } else { ?>    
+        <div><center><h3>Search Result</h3></center></div>
+        
+        <form action="" method="get">
+            Search:
+            <input type="search" name="filter" value = "<?php echo $filter ?>">
+            <input type="submit">
+        </form>
+        
+        <?php 
+            $url = '/api/search';
+            $searchresult = curl_get($url, array("filter"=>$filter));
+            
+            $users = $searchresult['result']['users'];
+            
+            foreach ($users as $key => $user) { ?>
+                <div id="section">  
+                <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div>    
+                <div class= <h4><?php echo $user['firstName'].' '.$user['lastName']?></h4></div>
+                <div class= <small><?php echo $user['email']?></small></div>
+                <div class= <sub><?php echo $user['phoneNumber']?></sub></div> 
+                <button type="button" class="btn btn-success" onClick='/user'>View</button>     
+            </div> 
+            <?php }
+            
+            $companies = $searchresult['result']['companies'];
+            
+            foreach ($companies as $key => $companies) { ?>
+                <div id="section">  
+                <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div>    
+                <div class= <h4><?php echo $companies['name']?></h4></div>
+                <button type="button" class="btn btn-success" onClick='/company'>View</button>     
+            </div> 
+            <?php }
+            
+            /*for($i=0; $i < 10; $i++) { ?>
+            <div id="section">  
+                <div class= "col-lg-2"><br><img src = "web.png" alt= "Job Posting" style = "width:100px;height:100px;"></div>
+                <div class= <h4>Software Engineer</h4></div>
+                <div class= <small>Microsoft</small></div>
+                <div class= <sub>Greater Atlanta Area</sub></div> 
+                <button type="button" class="btn btn-success">View</button>     
+            </div>
+        <?php } ?>*/
+    } ?>
     
-    
-
-   
-    
-
 </body>
 </html>

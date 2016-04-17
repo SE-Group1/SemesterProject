@@ -1,5 +1,22 @@
 <?php 
 
+
+    /**
+    * Returns GET data safely scrubbed using htmlspecialchars()
+    */
+    function getGETSafe($key) {
+        $val = htmlspecialchars($_GET[$key]);
+        return empty($val) ? NULL : $val;
+    }
+
+    /**
+    * Returns POST data safely scrubbed using htmlspecialchars()
+    */
+    function getPOSTSafe($key) {
+        $val = htmlspecialchars($_POST[$key]);
+        return empty($val) ? NULL : $val;
+    }
+
     /**
      * Called at the top of pages that require login to view
      * Checks user cookie and redirects them to login screen if 
