@@ -15,7 +15,7 @@
             $("#registerForm").submit(function(e) {
                 e.preventDefault();
                 
-                $.post('api/auth/register.php', $("#registerForm").serialize(), function(data) {
+                $.post('<?= getAPIUrl(); ?>api/auth/register.php', $("#registerForm").serialize(), function(data) {
                     if(!data || !data.success) {
                         console.log(data);
                         $("#errorMessage")
@@ -45,7 +45,7 @@
         <div class="col-md-6 col-md-offset-3">
             <hr>
             <div class="row">
-                <form id="registerForm"  role="form" style="display: block;">
+                <form id="registerForm" role="form" style="display: block;">
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="firstName">First name</label>
