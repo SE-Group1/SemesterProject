@@ -15,7 +15,7 @@
     
         #nav {
             line-height:30px;
-            background-color:#eeeeee;
+            background-color: white;
             height:1500px;
             width:200px;
             float:left;

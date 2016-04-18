@@ -44,7 +44,6 @@
     <div><img src="logo.png" class="logo-top">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <div class="panel panel-login">
                     <hr>
                     <div class="panel-body">
                         <div class="row">
@@ -80,7 +79,6 @@
                             </form>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

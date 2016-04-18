@@ -9,6 +9,9 @@
     body {
         background-color: #EFEFEF 
     }
+    hr {
+        border-color: #aaa; 
+    }
 </style>
 
 <script>
