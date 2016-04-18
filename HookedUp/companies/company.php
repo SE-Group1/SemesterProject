@@ -9,7 +9,22 @@
     
     $result = curl_get($url, $fields);
     $company = $result['result'][0];
-    echo json_encode($company);
+    //echo json_encode($company);
+    
+    $field = array(
+        'companyId' => 'Company-1'
+    );
+    
+    $url1 = "/api/company/employees/index.php";
+    $results = curl_get($url1, $field);
+    $employees = $results['result'];
+    //echo json_encode($employees);
+    
+    $url2 = "/api/company/post.php";
+    $result2 = curl_get($url2, $field);
+    $posts = $result2['result'];
+    //echo json_encode($posts);
+    
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +92,11 @@
                 padding:10px;
             }
             
+            .postpic {
+                max-height: 150px;
+                max-width: 150px;
+            }
+            
             
            
                 
@@ -89,7 +109,7 @@
         <?php require '../navbar.php'; ?>
         <div id="container">
             <div class="col-md-3" >
-                <img src="company.jpeg" class="img-thumbnail">
+                <img src="papajohns.jpeg" class="img-thumbnail">
                 <h2>Similar Companies</h2>
                 <div class="row1">
                     <?php for($i=1; $i <=5; $i++)  { ?>
@@ -121,11 +141,14 @@
                        <h2>Current Employees</h2>
                         <div class="col-md-6">
                             <?php 
-                                for($i=0; $i < 5; $i++) { ?>
+                                foreach($employees as $employee) { 
+                                    $user=$employee['user'];?>
+                                   
                                 <div><img src="dt.jpeg" class="employ img-thumbnail"></div>
                                 <div>
-                                    <div class="name"><h4><b>Donald Trump</b></h4></div>
-                                    <div class="name"><h5><b>Professional Wall-Builder</b></h5></div>
+                                    <div class="name"><h4><b><?php echo $user['firstName']; echo " " . $user['lastName']?></b></h4></div>
+                                    <div class="name"><h5><b><?php echo $employee['title']?></b></h5></div>
+                                    <div class="name"><h5><b><?php echo $user['email']?></b></h5></div>
                                 </div>
                                 <div class="clearfix"></div>
                                 
@@ -152,9 +175,10 @@
                        <hr>
                        
                         <?php
-                            for($i=0; $i < 10; $i++) { ?>
-                                <div><img src="company.jpeg" class="col-md-4" class="column">
-                                <div class="col-md-6" class="column"> Lorem ipsum dolor sit amet, aenean porta nec velit, lectus posuere, tortor quamt fasdjlskfjas a kgjasdl ajsflaksd fkj lkjf asdlfjas fsjf  sdfkjasf asfjijfaslkfj skfjsdf sdjf lkdjfasd flkajf </div>
+                            foreach($posts as $post) { ?>
+                                <div><img src="Papajohns.jpeg" class="col-md-4 img-thumbnail postpic" >
+                                <div class="col-md-6"><?php echo $post['comment'] ?> </div>
+                                <div class="name"><h5><b><?php echo $post['createdAt']?></b></h5></div>
                                 <div class='clearfix'></div>
                                 </div><hr>
                             <?php }

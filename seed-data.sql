@@ -245,7 +245,10 @@ INSERT INTO `post` VALUES
     ('Post-1', DEFAULT, 'User-1', NULL, 'Get HookedUp, you fools!', NULL),
     ('Post-2', DEFAULT, 'User-2', NULL, 'After a long career, which I am grateful for, I am announcing my retirement.', NULL),
     ('Post-3', DEFAULT, 'User-6', NULL, 'Boop', NULL),
-    ('Post-4', DEFAULT, NULL, 'Company-1', 'Come get a slice today! It\'s 50% off!', NULL);
+    ('Post-4', '2016-01-01 12:12:12', NULL, 'Company-1', 'Come get a slice today! It\'s 50% off!', NULL),
+    ('Post-5', '2016-02-04 20:20:12', NULL, 'Company-1', 'Blues win! Free Pizza for everyone!', NULL),
+    ('Post-6', DEFAULT, NULL, 'Company-1', 'Try our new thin crust Buffalo Ranch Pizza', NULL),
+    ('Post-7', '2015-12-12 20:24:55', NULL, 'Company-1', 'Come get a slice today! It\'s 50% off!', NULL);
 
 CREATE TABLE `postLike` (
     id varchar(36) NOT NULL PRIMARY KEY,
