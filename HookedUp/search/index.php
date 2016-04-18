@@ -1,5 +1,7 @@
 <?php require '../tools.php';
     requireLoggedIn();
+    
+    $filter = getGETSafe('filter');
 ?>
 <!DOCTYPE html>
 <html>
