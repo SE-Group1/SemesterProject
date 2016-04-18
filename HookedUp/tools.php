@@ -74,7 +74,7 @@ function isUserLoggedIn() {
  * Send a POST requst using cURL
  * Reference: Davic from Code2Design.com http://php.net/manual/en/function.curl-exec.php
  */ 
-function curl_post($urlPart, array $post = NULL, array $options = array()) 
+function curl_post($urlPart, array $post = array(), array $options = array()) 
 {
     $url = getAPIUrl() . $urlPart;
     
@@ -103,7 +103,7 @@ function curl_post($urlPart, array $post = NULL, array $options = array())
  * Send a GET requst using cURL
  * Reference: Davic from Code2Design.com http://php.net/manual/en/function.curl-exec.php
  */ 
-function curl_get($urlPart, array $get = NULL, array $options = array()) 
+function curl_get($urlPart, array $get = array(), array $options = array()) 
 {    
     $url = getAPIUrl() . $urlPart;
     

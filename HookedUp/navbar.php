@@ -20,9 +20,16 @@
 
     <ul class="nav navbar-nav navbar-right">
       <?php if($loggedIn) { ?>
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a id="logoutButton" href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
       <?php } ?>
       <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
     </ul>
   </div>
+  <script>
+    $("#logoutButton").click(function(e) {
+      e.preventDefault();
+      
+      makeRequest("/api/auth/logout.php", "POST");
+    });
+  </script>
 </nav>
