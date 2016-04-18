@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php require 'links.php'; ?>
+        <?php require '../links.php'; ?>
         
         <style>
         h2 {
@@ -13,10 +13,10 @@
     </head>
     
     <body>
-        <?php require 'navbar.php'; ?>
+        <?php require '../navbar.php'; ?>
         
         <h2>Create Company</h2>
-        <form class="form-horizontal">
+        <form class="form-horizontal" action="../api/company/visitors/create.php" method="GET">
 <fieldset>
 
 <!-- Create Company -->
@@ -30,11 +30,21 @@
     
   </div>
 </div>
+
+<!--Manager's Username-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="company_name">Managers Username</label>  
+  <div class="col-md-4">
+  <input id="manager" name="manager" type="text" placeholder="Managers Username" class="form-control input-md">
+    
+  </div>
+</div>
+
 <!--Company Location-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="Location">Location</label>  
+  <label class="col-md-4 control-label" for="creditcard">Credit Card Number</label>  
   <div class="col-md-4">
-  <input id="Location" name="Location" type="text" placeholder="Location" class="form-control input-md">
+  <input id="creditcard" name="creditcard type="text" placeholder="Credit Card Number" class="form-control input-md">
     
   </div>
 </div>
@@ -44,8 +54,8 @@
   <label class="col-md-4 control-label" for="Premium">Premium</label>
   <div class="col-md-4">
     <select id="Premium" name="Premium" class="form-control">
-      <option value="1">Enabled</option>
-      <option value="2">Disabled</option>
+      <option value="true">Enabled</option>
+      <option value="false">Disabled</option>
     </select>
   </div>
 </div>
@@ -59,6 +69,13 @@
 
 </fieldset>
 </form>
+<script>
+    $( "form" ).submit(function( event ) {
+  if ( $( "input:first" ).val() === "correct" ) {
+    $( "span" ).text( "Validated..." ).show();
+    return;
+  }
+  </script>
 
         
     </body>
