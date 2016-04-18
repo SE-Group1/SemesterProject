@@ -1,15 +1,5 @@
 <?php require '../tools.php';
-    
     requireLoggedIn();
-    
-    $url = $_SERVER['HTTP_HOST'] . "/api/user/index.php";
-    $fields = array(
-        'id' => 'User-1'
-    );
-    
-    $result = curl_get($url, $fields);
-    $company = $result['result'][0];
-    echo json_encode($company);
 ?>
 <!DOCTYPE html>
 <html>
