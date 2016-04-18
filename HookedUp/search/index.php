@@ -65,22 +65,22 @@ Experience Level<br>
             $searchresult = curl_get($url, array("filter"=>$filter));
             
             $users = $searchresult['result']['users'];
-            
-            foreach ($users as $key => $user) { ?>
-                <div id="section">  
-                <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div>    
-                <div class= <h4><?php echo $user['firstName'].' '.$user['lastName']?></h4></div>
-                <div class= <small><?php echo $user['email']?></small></div>
-                <div class= <sub><?php echo $user['phoneNumber']?></sub></div> 
-                <button type="button" class="btn btn-success" onClick='/user'>View</button>     
+            foreach ($users as $key => $user) { ?>  
+                <div id="section"> 
+                    <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div> 
+                    <div class= <h4>Profile Type: People</h4></div>
+                    <div class= <h4><?php echo $user['firstName'].' '.$user['lastName']?></h4></div>
+                    <div class= <small><?php echo $user['email']?></small></div>
+                    <div class= <sub><?php echo $user['phoneNumber']?></sub></div> 
+                    <button type="button" class="btn btn-success" onClick='/user'>View</button>  
             </div> 
             <?php }
             
             $companies = $searchresult['result']['companies'];
-            
             foreach ($companies as $key => $companies) { ?>
                 <div id="section">  
-                <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div>    
+                <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div> 
+                <div class= <h4>Profile Type: Company</h4></div>   
                 <div class= <h4><?php echo $companies['name']?></h4></div>
                 <button type="button" class="btn btn-success" onClick='/company'>View</button>     
             </div> 
