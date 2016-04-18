@@ -1,15 +1,13 @@
-<?php 
-require $_SERVER['DOCUMENT_ROOT'].'/tools.php';
-requireLoggedIn();
+<?php require '../tools.php';
+    requireLoggedIn();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 <title>Search Results</title>
 </head>
 <body>
-        <?php require '../links.php'; ?>
+    <?php require '../links.php'; ?>
     <style>
         
             .btn btn-success {
@@ -32,7 +30,7 @@ requireLoggedIn();
             }   
 
     </style>
-<?php require $_SERVER['DOCUMENT_ROOT'].'/navbar.php'; ?>
+<?php require '../navbar.php'; ?>
 <div id="nav">
 Location<br>
 Company<br>
@@ -61,11 +59,13 @@ Experience Level<br>
         </form>
         
         <?php 
-            $url = '/api/search';
-            $searchresult = curl_get($url, array("filter"=>$filter));
+            $result = curl_get("api/search/index.php", array(
+                "filter" => $filter
+            ));
             
-            $users = $searchresult['result']['users'];
-            foreach ($users as $key => $user) { ?>  
+            $users = $result['result']['users'];
+            
+            foreach ($users as $user) { ?>  
                 <div id="section"> 
                     <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div> 
                     <div class= <h4>Profile Type: People</h4></div>
@@ -76,12 +76,12 @@ Experience Level<br>
             </div> 
             <?php }
             
-            $companies = $searchresult['result']['companies'];
-            foreach ($companies as $key => $companies) { ?>
+            $companies = $result['result']['companies'];
+            foreach ($companies as $company) { ?>
                 <div id="section">  
                 <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div> 
                 <div class= <h4>Profile Type: Company</h4></div>   
-                <div class= <h4><?php echo $companies['name']?></h4></div>
+                <div class= <h4><?php echo $company['name']?></h4></div>
                 <button type="button" class="btn btn-success" onClick='/company'>View</button>     
             </div> 
             <?php }
@@ -95,7 +95,7 @@ Experience Level<br>
                 <button type="button" class="btn btn-success">View</button>     
             </div>
         <?php } ?>*/
-    } ?>
+        } ?>
     
 </body>
 </html>
