@@ -44,13 +44,13 @@ function redirect($urlPart) {
  */
 function requireLoggedIn() {
     if(!isUserLoggedIn()) {
-        header("Location: http://" . getClientUrl() . "/login.php");
+        header("Location: " . getClientUrl() . "login.php");
     }
 }
 
 function checkLoggedIn() {
     if(isUserLoggedIn()) {
-        header("Location: http://" . getClientUrl . "/home.php");
+        header("Location: " . getClientUrl . "home.php");
     }
 }
 
