@@ -10,7 +10,7 @@
 
         <!-- Search bar -->
         <div class="pull-left">
-          <form class="navbar-form" action="<?= getClientUrl(); ?>search/" method="GET">
+          <form class="navbar-form" action="<?= $baseUrl ?>search/" method="GET">
             <div class="input-group">
                 <input name="filter" class="form-control" placeholder="Search HookedUp">
                 <div class="input-group-btn">
