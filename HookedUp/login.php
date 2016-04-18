@@ -6,11 +6,7 @@
     <style>
         .logo-top {
             display: block;
-            margin: 50px auto 0 auto;
-        }
-        .logo-bottom {
-            display: block;
-            margin: 0 auto 0 auto;
+            margin: 50px auto 10px auto;
         }
     </style>
     <script>
@@ -45,8 +41,7 @@
 <?php require 'navbar.php'; ?>
 
 <div class="container">
-    <div class="logo"><div><img src="hooked.png" class="logo-top"></div>
-    <div><img src="up.png" class="logo-bottom"></div></div>
+    <div><img src="logo.png" class="logo-top">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-login">
