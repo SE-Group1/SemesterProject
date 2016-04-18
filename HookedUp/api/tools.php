@@ -108,95 +108,93 @@ function exec_stmt($query, $type = null, $param = null , $param2 = null, $param3
         return $array;         
 }
 
+function getRootUrl() {
+    if (strpos($_SERVER['HTTP_HOST'], "localhost:8000") !== FALSE) {
+        return "http://localhost:8001";    
+    }
+    
+    return $_SERVER['HTTP_HOST'];
+}
+
 function requireLoggedIn() {
-        if(!isUserLoggedIn()) {
-            header("Location: http://" . $_SERVER['HTTP_HOST'] . "/login.php");
-        }
+    if(!isUserLoggedIn()) {
+        failure("Not logged in");
+    }
+}
+
+function checkLoggedIn() {
+    if(isUserLoggedIn()) {
+        failure("Already logged in");
+    }
+}
+
+function isUserLoggedIn() {
+    session_start();
+    
+    if(!isset($_SESSION['id'])) {
+        return false;
     }
     
-    function checkLoggedIn() {
-        if(isUserLoggedIn()) {
-            header("Location: http://" . $_SERVER['HTTP_HOST'] . "/home.php");
-        }
-    }
+    $url = "/api/auth/authenticate.php";
+    $fields = array(
+        'id' => $_SESSION['id'],
+        'sessionId' => session_id()
+    );
     
-    function isUserLoggedIn() {
-        session_start();
-        
-        if(!isset($_SESSION['id'])) {
-            return false;
-        }
-        
-        $url = "/api/auth/authenticate.php";
-        $fields = array(
-            'id' => $_SESSION['id'],
-            'sessionId' => session_id()
-        );
-        
-        $result = curl_post($url, $fields);
-        return $result['result'];
-    }
+    $result = curl_post($url, $fields);
+    return $result['result'];
+}
+
+/** 
+    * Send a POST requst using cURL
+    * Reference: Davic from Code2Design.com http://php.net/manual/en/function.curl-exec.php
+    */ 
+function curl_post($urlPart, array $post = NULL, array $options = array()) 
+{
+    $url = getRootUrl() . $urlPart;
     
-    /** 
-     * Send a POST requst using cURL
-     * Reference: Davic from Code2Design.com http://php.net/manual/en/function.curl-exec.php
-     */ 
-    function curl_post($url, array $post = NULL, array $options = array()) 
+    $defaults = array( 
+        CURLOPT_POST => 1, 
+        CURLOPT_HEADER => 0, 
+        CURLOPT_URL => $url, 
+        CURLOPT_FRESH_CONNECT => 1, 
+        CURLOPT_RETURNTRANSFER => 1, 
+        CURLOPT_FORBID_REUSE => 1, 
+        CURLOPT_TIMEOUT => 4, 
+        CURLOPT_POSTFIELDS => http_build_query($post) 
+    ); 
+
+    $ch = curl_init(); 
+    curl_setopt_array($ch, ($options + $defaults)); 
+    if( ! $result = curl_exec($ch)) 
     { 
-        
-        if (strpos($_SERVER['HTTP_HOST'], "localhost:8000") !== FALSE) {
-            $url = "http://localhost:8001".$url;    
-        } else {
-            $url = $_SERVER['HTTP_HOST'].$url;
-        }
-        
-        
-        $defaults = array( 
-            CURLOPT_POST => 1, 
-            CURLOPT_HEADER => 0, 
-            CURLOPT_URL => $url, 
-            CURLOPT_FRESH_CONNECT => 1, 
-            CURLOPT_RETURNTRANSFER => 1, 
-            CURLOPT_FORBID_REUSE => 1, 
-            CURLOPT_TIMEOUT => 4, 
-            CURLOPT_POSTFIELDS => http_build_query($post) 
-        ); 
-
-        $ch = curl_init(); 
-        curl_setopt_array($ch, ($options + $defaults)); 
-        if( ! $result = curl_exec($ch)) 
-        { 
-            trigger_error(curl_error($ch)); 
-        } 
-        curl_close($ch);
-        return json_decode($result, true); 
+        trigger_error(curl_error($ch)); 
     } 
+    curl_close($ch);
+    return json_decode($result, true); 
+} 
 
-    /** 
-     * Send a GET requst using cURL
-     * Reference: Davic from Code2Design.com http://php.net/manual/en/function.curl-exec.php
-     */ 
-    function curl_get($url, array $get = NULL, array $options = array()) 
-    {    
-        if (strpos($_SERVER['HTTP_HOST'], "localhost:8000") !== FALSE) {
-            $url = "http://localhost:8001".$url;    
-        } else {
-            $url = $_SERVER['HTTP_HOST'].$url;
-        }
-        
-        $defaults = array( 
-            CURLOPT_URL => $url. (strpos($url, '?') === FALSE ? '?' : ''). http_build_query($get), 
-            CURLOPT_HEADER => 0, 
-            CURLOPT_RETURNTRANSFER => TRUE, 
-            CURLOPT_TIMEOUT => 4 
-        ); 
-        
-        $ch = curl_init(); 
-        curl_setopt_array($ch, ($options + $defaults)); 
-        if( ! $result = curl_exec($ch)) 
-        { 
-            trigger_error(curl_error($ch)); 
-        } 
-        curl_close($ch);
-        return json_decode($result, true);
-    }
+/** 
+    * Send a GET requst using cURL
+    * Reference: Davic from Code2Design.com http://php.net/manual/en/function.curl-exec.php
+    */ 
+function curl_get($urlPart, array $get = NULL, array $options = array()) 
+{    
+    $url = getRootUrl() . $urlPart;
+    
+    $defaults = array( 
+        CURLOPT_URL => $url. (strpos($url, '?') === FALSE ? '?' : ''). http_build_query($get), 
+        CURLOPT_HEADER => 0, 
+        CURLOPT_RETURNTRANSFER => TRUE, 
+        CURLOPT_TIMEOUT => 4 
+    ); 
+    
+    $ch = curl_init(); 
+    curl_setopt_array($ch, ($options + $defaults)); 
+    if( ! $result = curl_exec($ch)) 
+    { 
+        trigger_error(curl_error($ch)); 
+    } 
+    curl_close($ch);
+    return json_decode($result, true);
+}
