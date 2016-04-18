@@ -1,12 +1,11 @@
+<?php $baseUrl = getClientUrl(); ?>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">HookedUp</a>
+      <a class="navbar-brand" href="<?= $baseUrl ?>index.php"><img src="<?= $baseUrl ?>logo_white.png" width="112" height="30"></a>
     </div>
     <ul class="nav navbar-nav">
       <?php if($loggedIn) { ?>
-        <?php $baseUrl = getClientUrl(); ?>
-        <li><a href="<?= $baseUrl ?>home.php">Home</a></li>
         <li><a href="<?= $baseUrl ?>companies/company.php">Companies</a></li>
 
         <!-- Search bar -->
