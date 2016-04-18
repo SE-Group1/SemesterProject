@@ -1,4 +1,5 @@
 <?php 
+    $loggedIn = false;
 
     /**
     * Returns GET data safely scrubbed using htmlspecialchars()
@@ -47,7 +48,10 @@
         );
         
         $result = curl_post($url, $fields);
-        return $result['result'];
+        
+        global $loggedIn;
+        $loggedIn = $result['result'];
+        return $loggedIn;
     }
     
     /** 

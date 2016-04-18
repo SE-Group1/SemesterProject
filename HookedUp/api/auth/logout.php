@@ -3,7 +3,6 @@
     
     requireLoggedIn();
     
-    
     $conn = mysqlConnect();
     $query = "UPDATE user SET sessionId = NULL WHERE id = ?";
 

@@ -1,5 +1,5 @@
 <?php require 'tools.php'; 
-    $loggedIn = requireLoggedIn();
+    requireLoggedIn();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
 
 <div class="container">
     <p id="result">
-        <?= $loggedIn; ?>
+        This page will show the user's feed.
     </p>
 </div>
 
