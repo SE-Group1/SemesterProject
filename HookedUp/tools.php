@@ -74,6 +74,18 @@ function isUserLoggedIn() {
     return $loggedIn;
 }
 
+function getUserFirstName() {
+    return $_SESSION['firstName'];
+}
+
+function getUserLastName() {
+    return $_SESSION['lastName'];
+}
+
+function getUserFullName() {
+    return getUserFirstName() . " " . getUserLastName();
+}
+
 /** 
  * Send a POST requst using cURL
  * Reference: Davic from Code2Design.com http://php.net/manual/en/function.curl-exec.php
