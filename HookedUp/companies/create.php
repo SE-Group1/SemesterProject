@@ -1,3 +1,6 @@
+<?php require '../tools.php';
+  requireLoggedIn();
+?>
 <!DOCTYPE html>
 <html>
     <head>

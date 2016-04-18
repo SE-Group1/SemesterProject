@@ -27,10 +27,10 @@ function getClientUrl() {
 
 function getAPIUrl() {
     if (strpos($_SERVER['HTTP_HOST'], "localhost:8000") !== FALSE) {
-        return "http://localhost:8001";    
+        return "http://localhost:8001" . "/";
     }
     
-    return  $_SERVER['HTTP_HOST'];
+    return "http://" . $_SERVER['HTTP_HOST'] . "/";
 }
 
 function redirect($urlPart) {
