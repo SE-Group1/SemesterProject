@@ -1,6 +1,5 @@
 <?php 
 
-
     /**
     * Returns GET data safely scrubbed using htmlspecialchars()
     */
