@@ -116,29 +116,29 @@ function getRootUrl() {
     return $_SERVER['HTTP_HOST'];
 }
 
-function requireLoggedIn() {
-    if(!isUserLoggedIn()) {
+function requireLoggedIn($userId, $sessionId) {
+    if(!isUserLoggedIn($userId, $sessionId)) {
         failure("Not logged in");
     }
 }
 
-function checkLoggedIn() {
-    if(isUserLoggedIn()) {
+function checkLoggedIn($userId, $sessionId) {
+    if(isUserLoggedIn($userId, $sessionId)) {
         failure("Already logged in");
     }
 }
 
-function isUserLoggedIn() {
+function isUserLoggedIn($userId, $sessionId) {
     session_start();
     
-    if(!isset($_SESSION['id'])) {
+    if(!isset($sessionId)) {
         return false;
     }
     
     $url = "/api/auth/authenticate.php";
     $fields = array(
-        'id' => $_SESSION['id'],
-        'sessionId' => session_id()
+        'id' => $userId,
+        'sessionId' => $sessionId
     );
     
     $result = curl_post($url, $fields);

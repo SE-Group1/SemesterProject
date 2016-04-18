@@ -6,6 +6,10 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script>
+    function redirect(var urlPart) {
+        window.location.href = <?= getClientUrl(); ?> + urlPart);
+    }
+    
     function makeRequest(var urlPart, var method, var params = array()) {
        
         var url = <?= getAPIUrl(); ?> + urlPart;

@@ -22,7 +22,7 @@ function getPOSTSafe($key) {
  * Helper functions to get root urls for client & API
  */
 function getClientUrl() {
-    return $_SERVER['HTTP_HOST'];
+    return "http://" . $_SERVER['HTTP_HOST'] . "/";
 }
 
 function getAPIUrl() {
@@ -30,7 +30,11 @@ function getAPIUrl() {
         return "http://localhost:8001";    
     }
     
-    return $_SERVER['HTTP_HOST'];
+    return  $_SERVER['HTTP_HOST'];
+}
+
+function redirect($urlPart) {
+    header("Location: " . getClientUrl() . $urlPart);
 }
 
 /**

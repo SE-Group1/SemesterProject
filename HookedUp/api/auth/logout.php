@@ -1,7 +1,10 @@
 <?php 
     require '../tools.php';
     
-    requireLoggedIn();
+    $id = getPOSTSafe('id');
+    $sessionId = getPOSTSafe('sessionId');
+    
+    requireLoggedIn($id, $sessionId);
     
     $conn = mysqlConnect();
     $query = "UPDATE user SET sessionId = NULL WHERE id = ?";

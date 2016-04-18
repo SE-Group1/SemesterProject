@@ -3,5 +3,14 @@
     
     requireLoggedIn();
     
-    $result = curl_post("/api/auth/logout.php");
-    echo json_encode($result);
+    $url = "/api/auth/logout.php";
+    $fields = array(
+        'id' => $_SESSION['id'],
+        'sessionId' => session_id()
+    );
+    
+    $result = curl_post($url, $fields);
+    if($result['success']) {
+        session_destroy();
+        redirect("login.php");
+    }
