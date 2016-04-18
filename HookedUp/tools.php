@@ -23,6 +23,18 @@
      * not logged in or invalid. 
      */
     function requireLoggedIn() {
+        if(!isUserLoggedIn()) {
+            header("Location: http://" . $_SERVER['HTTP_HOST'] . "/login.php");
+        }
+    }
+    
+    function checkLoggedIn() {
+        if(isUserLoggedIn()) {
+            header("Location: http://" . $_SERVER['HTTP_HOST'] . "/home.php");
+        }
+    }
+    
+    function isUserLoggedIn() {
         session_start();
         
         if(!isset($_SESSION['id'])) {
@@ -36,10 +48,7 @@
         );
         
         $result = curl_post($url, $fields);
-        
-        if(!$result['result']) {
-            header("Location: http://" . $_SERVER['HTTP_HOST']);
-        }
+        return $result['result'];
     }
     
     /** 
