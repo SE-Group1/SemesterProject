@@ -8,11 +8,19 @@
         <li><a href="#">Home</a></li>
         <li><a href="posts.php">Posts</a></li>
         <li><a href="Editprofile.php">Edit Profile</a></li>
-        <li><form action="" method="get">
-            Search:
-            <input type="search" name="filter" value = "<?php echo $filter ?>">
-            <input type="submit">
-        </form></li>
+        <!--<li><form action="<?= getClientUrl(); ?>search/" method="get" role="form">
+            <input type="search" class="form-control" name="filter" placeholder="Search HookedUp" style="display:inline" value = "<?php echo $filter ?>">
+            <button type="submit" class="btn btn-small btn-success" style="display:inline">Search</button>
+        </form></li>-->
+        <div class="pull-right">
+        <form class="navbar-form" action="<?= getClientUrl(); ?>search/" method="GET">
+          <div class="input-group">
+              <input name="filter" class="form-control" placeholder="Search HookedUp">
+              <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+          </div>
+        </form>
         
         <!--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
           <ul class="dropdown-menu">
