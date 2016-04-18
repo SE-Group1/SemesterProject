@@ -18,6 +18,13 @@ function mysqlConnect() {
 }
 
 /**
+ * Gets the sessionId from header data 
+ */
+function getSessionId() {
+    return getAllHeaders()['X-Session-Id'];
+}
+
+/**
  * Returns GET data safely scrubbed using htmlspecialchars()
  */
 function getGETSafe($key) {
