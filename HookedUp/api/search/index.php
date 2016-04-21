@@ -7,15 +7,27 @@
             if (!$filter = getGETSafe('filter')) {
                 failure("filter required");
             }
+            $explodedFilter = explode(" ", $filter);
             
-            $filter = '%'.$filter.'%';
+            foreach ($explodedFilter as $key => $value) {
+                $query_parts[] = "'%".$value."%'";            
+            }
             
-            $query = "SELECT ".userProperties()." FROM user WHERE username LIKE ? OR firstName LIKE ? OR lastName LIKE ?";
-            $users = exec_stmt($query, "sss", $filter, $filter, $filter);
+            $filter_username = implode(' OR username LIKE ', $query_parts);
+            $filter_firstName = implode(' OR firstName LIKE ', $query_parts);
+            $filter_lastName = implode(' OR lastName LIKE ', $query_parts);
+            
+            
+            $query = "SELECT ".userProperties()." FROM user WHERE username LIKE {$filter_username} 
+                OR firstName LIKE {$filter_firstName} 
+                OR lastName LIKE {$filter_lastName}";
+                
+            $users = exec_stmt($query);
            
-            
-            $query = "SELECT ".companyProperties()." FROM company WHERE name LIKE ?";
-            $companies = exec_stmt($query, "s", $filter);
+            $filter_name = implode(' OR name LIKE ', $query_parts);
+           
+            $query = "SELECT ".companyProperties()." FROM company WHERE name LIKE {$filter_name}";
+            $companies = exec_stmt($query);
             
             $result = array();
             

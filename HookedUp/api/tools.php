@@ -3,6 +3,7 @@
 /**
  * Returns a mysqli object with a valid connection to the server's database
  */
+ 
 function mysqlConnect() {
     $servername = "127.0.0.1";
     $username = "root";
@@ -79,14 +80,16 @@ function companyProperties($root = "company") {
         .$root."profileImageId, ".$root."isPremium";
 }
 
-function exec_stmt($query, $type = null, $param = null , $param2 = null, $param3 = null) {
+function exec_stmt($query, $type = null, $param = null , $param2 = null, $param3 = null, $param4 = null) {
         $conn = mysqlConnect();
         if (!$stmt = $conn->prepare($query)) {
             failure("Prepare failed: " . $conn->error);
         }
         
         if ($type != null) {
-            if ($param3 != null) {
+            if ($param4 != null) {
+                $stmt->bind_param($type, $param, $param2, $param3, $param4);
+            } else if ($param3 != null) {
                 $stmt->bind_param($type, $param, $param2, $param3);        
             } else if ($param2 != null) {
                 $stmt->bind_param($type, $param, $param2);
