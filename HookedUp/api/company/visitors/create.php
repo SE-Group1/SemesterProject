@@ -1,13 +1,14 @@
-<?php
-    require $_SERVER['DOCUMENT_ROOT'] . '/api/tools.php';
+<?php require '../../tools.php';
     
     $method = htmlspecialchars($_SERVER['REQUEST_METHOD']);
     $conn = mysqlConnect();
-    echo "Hello World";
-    echo $_GET['company_name'];
+    $_GET['company_name'];
     $id=$_GET['company_id'];
-    $manager=$_GET['manager'];
+    $manager=$_POST['manager'];
     $creditcard=$_GET['creditcard'];
+    
+    $manager = getPOSTSafe('manager');
+    
     $image="Image-1";
     
     switch ($method) {
@@ -18,22 +19,8 @@
             }
             $query ="INSERT INTO `company` VALUES 
                 (UUID(), DEFAULT, ?, NULL, ?, ?, ?, true)";
-                if($stmt = mysqli_prepare($conn, $query)) {
-                    mysqli_stmt_bind_param($stmt, "ssss", $name, $manager, $image, $creditcard);
-                    mysqli_stmt_execute($stmt);
-                    mysqli_stmt_close($stmt);
-                    
-                    ?>
-                    <form>
-                        <input type="hidden" value="<?php $_GET['company_id']?>">
-                    </form>
-                    <script>
-                    window.location.replace("http://localhost:8000/companies/company.php");
-                    </script>
-                   <?php
-                }
-                else {
-                     echo FAILED;
+                
+            exec_stmt($query, );
                 }
                 
     } //end switch

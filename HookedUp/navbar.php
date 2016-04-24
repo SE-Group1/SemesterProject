@@ -7,6 +7,7 @@
     <ul class="nav navbar-nav">
       <?php if($loggedIn) { ?>
         <li><a href="<?= $baseUrl ?>companies/company.php">Companies</a></li>
+        <li><a href="<?=$baseUrl?>profile/visual.php">Connections</a></li>
 
         <!-- Search bar -->
         <div class="pull-left">

@@ -1,5 +1,6 @@
 <?php require '../tools.php';
   requireLoggedIn();
+  var_dump($_SESSION['id']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@
         <?php require '../navbar.php'; ?>
         
         <h2>Create Company</h2>
-        <form class="form-horizontal" action="../api/company/visitors/create.php" method="GET">
+        <form class="form-horizontal" action="../api/company/index.php" method="POST">
 <fieldset>
 
 <!-- Create Company -->
@@ -33,21 +34,13 @@
     
   </div>
 </div>
-
-<!--Manager's Username-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="company_name">Managers Username</label>  
-  <div class="col-md-4">
-  <input id="manager" name="manager" type="text" placeholder="Managers Username" class="form-control input-md">
-    
-  </div>
-</div>
+<input type="hidden" value="User-1" name="manager">
 
 <!--Company Location-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="creditcard">Credit Card Number</label>  
   <div class="col-md-4">
-  <input id="creditcard" name="creditcard type="text" placeholder="Credit Card Number" class="form-control input-md">
+  <input id="creditcard" name="creditcard" type="text" placeholder="Credit Card Number" class="form-control input-md">
     
   </div>
 </div>
