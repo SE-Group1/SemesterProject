@@ -2,29 +2,26 @@
     
     requireLoggedIn();
     
-    $url = "/api/company/index.php";
-    $fields = array(
+    $result = makeAPIRequest("/api/company/index.php", "GET", array(
         'id' => 'Company-1'
-    );
+    ));
     
-    $result = curl_get($url, $fields);
     $company = $result['result'][0];
     //echo json_encode($company);
     
-    $field = array(
+    $result = makeAPIRequest("/api/company/employees/index.php", "GET", array(
         'companyId' => 'Company-1'
-    );
+    ));
     
-    $url1 = "/api/company/employees/index.php";
-    $results = curl_get($url1, $field);
-    $employees = $results['result'];
+    $employees = $result['result'];
     //echo json_encode($employees);
     
-    $url2 = "/api/company/post.php";
-    $result2 = curl_get($url2, $field);
-    $posts = $result2['result'];
-    //echo json_encode($posts);
+    $reuslt = makeAPIRequest("/api/company/post.php", "GET", array(
+        'companyId' => 'Company-1'
+    ));
     
+    $posts = $result['result'];
+    //echo json_encode($posts);  
 ?>
 
 <!DOCTYPE html>
