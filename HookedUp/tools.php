@@ -109,6 +109,10 @@ function getUserFullName() {
  */
  function makeAPIRequest($urlPart, $method, array $data = array()) {
      $url = getAPIUrl() . $urlPart;
+     return makeJSONRequest($url, $method, $data);
+ }
+ 
+ function makeJSONRequest($url, $method, array $data = array()) {
      $result = makeRequest($url, $method, $data);
      return json_decode($result, true);
  }

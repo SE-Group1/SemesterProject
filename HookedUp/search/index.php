@@ -42,29 +42,29 @@
 
 <?php 
     if(isset($filter)) {
-        $result = curl_get("api/search/index.php", array(
+        $result = makeAPIRequest("api/search/index.php", "GET", array(
             "filter" => $filter
         ));
         
         $users = $result['result']['users'];
         
-        foreach ($users as $user) { ?>  
+        foreach ($users as $user) { ?>
             <div id="section"> 
-                <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div> 
-                <div class= <h4>Profile Type: People</h4></div>
-                <div class= <h4><?php echo $user['firstName'].' '.$user['lastName']?></h4></div>
-                <div class= <small><?php echo $user['email']?></small></div>
-                <div class= <sub><?php echo $user['phoneNumber']?></sub></div> 
+                <div class="col-lg-2"><br><img src="<?= getImageUrl($user['profileImageId']);?>" width="100" height="100"></div> 
+                <div><h4>Profile Type: People</h4></div>
+                <div><h4><?php echo $user['firstName'].' '.$user['lastName']?></h4></div>
+                <div><small><?php echo $user['email']?></small></div>
+                <div><sub><?php echo $user['phoneNumber']?></sub></div> 
                 <button type="button" class="btn btn-success" onClick='/user'>View</button>  
-            </div> 
+            </div>
         <?php }
         
         $companies = $result['result']['companies'];
         foreach ($companies as $company) { ?>
             <div id="section">  
-            <div class= "col-lg-2"><br><img src = "billGates.jpg" style = "width:100px;height:100px;"></div> 
-            <div class= <h4>Profile Type: Company</h4></div>   
-            <div class= <h4><?php echo $company['name']?></h4></div>
+            <div class="col-lg-2"><br><img src="<?= getImageUrl($company['profileImageId']); ?>" width="100" height="100"></div> 
+            <div><h4>Profile Type: Company</h4></div>   
+            <div><h4><?php echo $company['name']?></h4></div>
             <button type="button" class="btn btn-success" onClick='/company'>View</button>     
         </div> 
         <?php } ?>

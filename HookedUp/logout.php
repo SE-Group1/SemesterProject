@@ -9,7 +9,7 @@
         'sessionId' => session_id()
     );
     
-    $result = curl_post($url, $fields);
+    $result = makeAPIRequest($url, "POST", $fields);
     if($result['success']) {
         session_destroy();
         redirect("login.php");
