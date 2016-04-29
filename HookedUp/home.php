@@ -10,7 +10,19 @@
     <script>
         $(document).ready(function() {
             $.getJSON("api/feed/index.php", function(data) {
-                console.log(data);
+                //console.log(data);
+            });
+            
+            $.ajax({
+                url: "api/skill/endorse.php",
+                type: "POST",
+                data: {
+                    'userId': "User-2",
+                    "skillId": "Skill-1"
+                },
+                success: function(data) {
+                    $("#result").html(data);
+                }
             });
         });
     </script>
@@ -21,7 +33,6 @@
 
 <div class="container">
     <p id="result">
-        <img src="<?= getImageUrl('Image-1'); ?>" width="100" height="100">
     </p>
 </div>
 

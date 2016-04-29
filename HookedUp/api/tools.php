@@ -1,5 +1,8 @@
 <?php
 
+$_PUT;
+$_DELETE;
+
 /**
  * Returns a mysqli object with a valid connection to the server's database
  */
@@ -38,6 +41,15 @@ function getGETSafe($key) {
  */
 function getPOSTSafe($key) {
     $val = htmlspecialchars($_POST[$key]);
+    return empty($val) ? NULL : $val;
+}
+
+function getPUTSafe($key) {
+    global $_PUT;
+    if(!isset($_PUT)) {
+        parse_str(file_get_contents("php://input"), $_PUT);
+    }
+    $val = htmlspecialchars($_PUT[$key]);
     return empty($val) ? NULL : $val;
 }
 
@@ -103,6 +115,10 @@ function exec_stmt($query, $type = null, $param = null , $param2 = null, $param3
         }
         
         $result = $stmt->get_result();
+        if($result === false) {
+            return null;
+        }
+        
         $array = array();
         while ($row = $result->fetch_assoc()) {
             $array[] = $row;

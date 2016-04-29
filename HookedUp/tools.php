@@ -90,9 +90,17 @@ function getUserFullName() {
     return getUserFirstName() . " " . getUserLastName();
 }
 
+function isUser($userId) {
+    return getUserId() === $userId;
+}
+
 /**
  * Template functions
  */
+ function getUserImageUrl($user) {
+     return getImageUrl($user['profileImageId']);
+ }
+ 
  function getImageUrl($imageId) {
      
     $result = makeAPIRequest('api/image/index.php', 'GET', array(
