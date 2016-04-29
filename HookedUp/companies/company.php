@@ -59,7 +59,7 @@
             height: 100px;
             width: 100px;
             float: left;
-            margin: 10px;
+            margin-right: 10px;
         }
         
         .companies {
@@ -134,8 +134,7 @@
                             </div>
                             <div class="clearfix"></div>
                             
-                        <?php }
-                        ?>
+                        <?php } ?>
                     </div>
                     
                         <div class="col-md-6">

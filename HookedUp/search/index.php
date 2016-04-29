@@ -17,8 +17,6 @@
             line-height:30px;
             background-color: white;
             height:1500px;
-            width:200px;
-            float:left;
             padding:5px; 
         }
         #section {
@@ -26,49 +24,76 @@
             height:120px;
             padding:10px; 
         }
+        .card-title {
+            font-size: large;
+        }
+        
+        .employ {
+            height: 100px;
+            width: 100px;
+            float: left;
+            margin-right: 10px;
+        }
+        
+        .card {
+            background-color: white;
+            border-color: #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            box-shadow: 0px 2px 4px #999;
+        }
     </style>
 </head>
 <body>
 <?php require '../navbar.php'; ?>
-<div id="nav">
-    Location<br>
-    Company<br>
-    Date Posted<br>
-    Industry<br>
-    Experience Level<br>
-    <button type="button" class="btn btn-success">Filter</button> 
-</div>
-<div><center><h3>Search Results</h3></center></div>
-
-<?php 
-    if(isset($filter)) {
-        $result = makeAPIRequest("api/search/index.php", "GET", array(
-            "filter" => $filter
-        ));
-        
-        $users = $result['result']['users'];
-        
-        foreach ($users as $user) { ?>
-            <div id="section"> 
-                <div class="col-lg-2"><br><img src="<?= getImageUrl($user['profileImageId']);?>" width="100" height="100"></div> 
-                <div><h4>Profile Type: People</h4></div>
-                <div><h4><?php echo $user['firstName'].' '.$user['lastName']?></h4></div>
-                <div><small><?php echo $user['email']?></small></div>
-                <div><sub><?php echo $user['phoneNumber']?></sub></div> 
-                <button type="button" class="btn btn-success" onClick='/user'>View</button>  
-            </div>
-        <?php }
-        
-        $companies = $result['result']['companies'];
-        foreach ($companies as $company) { ?>
-            <div id="section">  
-            <div class="col-lg-2"><br><img src="<?= getImageUrl($company['profileImageId']); ?>" width="100" height="100"></div> 
-            <div><h4>Profile Type: Company</h4></div>   
-            <div><h4><?php echo $company['name']?></h4></div>
-            <button type="button" class="btn btn-success" onClick='/company'>View</button>     
-        </div> 
+<div class="row">
+    <div id="nav" class="col-md-2">
+        Location<br>
+        Company<br>
+        Date Posted<br>
+        Industry<br>
+        Experience Level<br>
+        <button type="button" class="btn btn-success">Filter</button> 
+    </div>
+    <div class="col-md-6">
+        <div class="text-center"><center><h3>Search Results</h3></center></div>
+        <?php 
+        if(isset($filter)) {
+            $result = makeAPIRequest("api/search/index.php", "GET", array(
+                "filter" => $filter
+            ));
+            
+            $users = $result['result']['users'];
+            
+            foreach ($users as $user) {
+                
+                $titles = $user['titles'];
+                $titleText = "";
+                for ($i = 0; isset($titles) && $i < count($titles); $i++) {
+                    $titleText .= ($i == 0 ? '' : ', ') . $titles[$i];
+                } ?>
+                <div class="card">
+                    <div><img src="<?= getImageUrl($user['profileImageId']); ?>" class="employ img-thumbnail"></div>
+                    <div>
+                        <div class="name"><h4><b><?= $user['firstName'] . " " . $user['lastName']; ?></b></h4></div>
+                        <div class="name text-muted"><h6><i><?= $titleText ?></i></h6></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            <?php }
+            
+            $companies = $result['result']['companies'];
+            foreach ($companies as $company) { ?>
+                <div id="section">  
+                <div class="col-lg-2"><br><img src="<?= getImageUrl($company['profileImageId']); ?>" width="100" height="100"></div> 
+                <div><h4>Profile Type: Company</h4></div>   
+                <div><h4><?= $company['name']?></h4></div>
+                <button type="button" class="btn btn-success" onClick='/company'>View</button>     
+            </div> 
+            <?php } ?>
         <?php } ?>
-    <?php } ?>
+    </div>
+</div>
     
 </body>
 </html>

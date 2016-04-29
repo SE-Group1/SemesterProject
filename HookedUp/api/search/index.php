@@ -23,6 +23,18 @@
                 OR lastName LIKE {$filter_lastName}";
                 
             $users = exec_stmt($query);
+            
+            foreach ($users as &$user) {
+                $query = "SELECT title FROM employment WHERE userId = ?";
+                $employments = exec_stmt($query, "s", $user['id']);
+                
+                $titles = array();
+                foreach($employments as $employment) {
+                    array_push($titles, $employment['title']);
+                }
+                
+                $user['titles'] = $titles;
+            }
            
             $filter_name = implode(' OR name LIKE ', $query_parts);
            
