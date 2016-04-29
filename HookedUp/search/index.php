@@ -14,10 +14,12 @@
         }
     
         #nav {
-            line-height:30px;
             background-color: white;
-            height:1500px;
-            padding:5px; 
+            height: 1500px;
+        }
+        #nav-content {
+            line-height: 30px;
+            padding: 10px;
         }
         #section {
             width:1000px;
@@ -48,12 +50,14 @@
 <?php require '../navbar.php'; ?>
 <div class="row">
     <div id="nav" class="col-md-2">
-        Location<br>
-        Company<br>
-        Date Posted<br>
-        Industry<br>
-        Experience Level<br>
-        <button type="button" class="btn btn-success">Filter</button> 
+        <div id="nav-content">
+            Location<br>
+            Company<br>
+            Date Posted<br>
+            Industry<br>
+            Experience Level<br>
+            <button type="button" class="btn btn-success">Filter</button> 
+        </div>
     </div>
     <div class="col-md-6">
         <div class="text-center"><center><h3>Search Results</h3></center></div>
@@ -75,7 +79,7 @@
                 <div class="card">
                     <div><img src="<?= getImageUrl($user['profileImageId']); ?>" class="employ img-thumbnail"></div>
                     <div>
-                        <div class="name"><h4><b><?= $user['firstName'] . " " . $user['lastName']; ?></b></h4></div>
+                        <div class="name"><h4><b><a href="<?= getClientUrl() . "profile/?id=" . $user['id']; ?>"><?= $user['firstName'] . " " . $user['lastName']; ?></a></b></h4></div>
                         <div class="name text-muted"><h6><i><?= $titleText ?></i></h6></div>
                     </div>
                     <div class="clearfix"></div>

@@ -33,7 +33,7 @@
 
     <ul class="nav navbar-nav navbar-right">
       <?php if($loggedIn) { ?>
-        <li><a href="<?= $baseUrl ?>profile/user.php"><?= getUserFullName(); ?></a></li>
+        <li><a href="<?= $baseUrl . "profile/?id=" . getUserId(); ?>"><?= getUserFullName(); ?></a></li>
         <li><a id="logoutButton" href="<?= $baseUrl ?>logout.php"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
       <?php } ?>
       <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
