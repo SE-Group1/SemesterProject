@@ -18,8 +18,8 @@
                 $endorsements = exec_stmt($query, "s", $skill['id']);
                 $skill['endorsements'] = $endorsements;
                 $skills[$key] = $skill;
-            }              
-          
+            }    
+            
             success($skills);
             break;
         case 'POST':

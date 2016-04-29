@@ -36,14 +36,6 @@
             float: left;
             margin-right: 10px;
         }
-        
-        .card {
-            background-color: white;
-            border-color: #ddd;
-            border-radius: 4px;
-            padding: 15px;
-            box-shadow: 0px 2px 4px #999;
-        }
     </style>
 </head>
 <body>
@@ -76,7 +68,7 @@
                 for ($i = 0; isset($titles) && $i < count($titles); $i++) {
                     $titleText .= ($i == 0 ? '' : ', ') . $titles[$i];
                 } ?>
-                <div class="card">
+                <div class="card shadow">
                     <div><img src="<?= getImageUrl($user['profileImageId']); ?>" class="employ img-thumbnail"></div>
                     <div>
                         <div class="name"><h4><b><a href="<?= getClientUrl() . "profile/?id=" . $user['id']; ?>"><?= $user['firstName'] . " " . $user['lastName']; ?></a></b></h4></div>

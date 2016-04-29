@@ -9,20 +9,22 @@
                 failure("id required arg");
             }
             
+            //Get user
             $query = "SELECT ".userProperties()." FROM user WHERE id = ?";
-            if (!$stmt = $conn->prepare($query)) {
-                failure("Prepare failed: " . $conn->error);
+            
+            $result = exec_stmt($query, "s", $id);
+            if($result == null || count($result) == 0) {
+                success();
             }
             
-            $stmt->bind_param("s", $id);
-            if (!$stmt->execute()) {
-                failure("Execute failed: " . $stmt->error);
-            }
+            $user = $result[0];
             
-            $result = $stmt->get_result();
-            if (!$user = $result->fetch_assoc()) {
-                failure("No user for id: ".$id);
-            }
+            //Get employment info
+            $query = "SELECT * FROM employment WHERE userId = ?";
+            $employments = exec_stmt($query, "s", $id);
+            
+            $user['employments'] = $employments;
+            
             success($user);
     
             break;

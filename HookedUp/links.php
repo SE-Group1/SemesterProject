@@ -12,6 +12,25 @@
     hr {
         border-color: #aaa; 
     }
+    .card {
+        background-color: white;
+        border-color: #ddd;
+        border-radius: 1px;
+        padding: 15px;
+    }
+    .shadow {
+        box-shadow: 0px 2px 4px #999;
+    }
+    .no-margin {
+        margin: 0px;
+    }
+    .no-padding {
+        padding: 0px;
+    }
+    .no-spacing {
+        margin: 0px;
+        padding: 0px;
+    }
 </style>
 
 <script>

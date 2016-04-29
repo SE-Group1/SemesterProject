@@ -17,7 +17,6 @@
             $filter_firstName = implode(' OR firstName LIKE ', $query_parts);
             $filter_lastName = implode(' OR lastName LIKE ', $query_parts);
             
-            
             $query = "SELECT ".userProperties()." FROM user WHERE username LIKE {$filter_username} 
                 OR firstName LIKE {$filter_firstName} 
                 OR lastName LIKE {$filter_lastName}";
