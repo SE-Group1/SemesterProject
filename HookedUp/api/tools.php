@@ -29,16 +29,13 @@ function getSessionId() {
 }
 
 /**
- * Returns GET data safely scrubbed using htmlspecialchars()
+ * Returns request data that has been scrubbed using htmlspecialchars()
  */
 function getGETSafe($key) {
     $val = htmlspecialchars($_GET[$key]);
     return empty($val) ? NULL : $val;
 }
 
-/**
- * Returns POST data safely scrubbed using htmlspecialchars()
- */
 function getPOSTSafe($key) {
     $val = htmlspecialchars($_POST[$key]);
     return empty($val) ? NULL : $val;
@@ -50,6 +47,15 @@ function getPUTSafe($key) {
         parse_str(file_get_contents("php://input"), $_PUT);
     }
     $val = htmlspecialchars($_PUT[$key]);
+    return empty($val) ? NULL : $val;
+}
+
+function getDELETESafe($key) {
+    global $_DELETE;
+    if(!isset($_DELETE)) {
+        parse_str(file_get_contents("php://input"), $_DELETE);
+    }
+    $val = htmlspecialchars($_DELETE[$key]);
     return empty($val) ? NULL : $val;
 }
 
