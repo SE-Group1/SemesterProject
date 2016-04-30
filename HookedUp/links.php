@@ -38,9 +38,21 @@
         window.location.href = "<?= getClientUrl(); ?>" + urlPart;
     }
     
-    function makeRequest(urlPart, method, params = []) {
-       
+    /**
+     * Request helper functions
+     */
+    function makeAPIRequest(urlPart, method, data) {
         var url = "<?= getAPIUrl(); ?>" + urlPart;
-        
+        return makeRequest(url, method, data);
+    }
+    
+    function makeRequest(url, method, data) {
+       
+       return $.ajax({
+           url: url,
+           method: method,
+           data: data,
+           dataType: "json"
+       });
     }
 </script>

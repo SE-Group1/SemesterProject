@@ -59,7 +59,19 @@
     </style>
     <script>
         function endorseSkill(skillId) {
-            
+            // makeAPIRequest("/api/skill/endorse.php", "PUT", {
+            //     "userId": "<?= getUserId(); ?>",
+            //     "skillId": skillId
+            // }, 
+            // function(data) {
+            //    console.log(data); 
+            // });
+            makeAPIRequest("/api/skill/endorse.php", "PUT", {
+                "userId": "<?= getUserId(); ?>",
+                "skillId": skillId
+            }).done(function(data) {
+                console.log(data);
+            });
         }
     </script>
 </head>
@@ -87,7 +99,7 @@
                             
                             <?php $endorsements = $skill['endorsements'];
                             if(isset($endorsements) && count($endorsements) > 0) { ?>
-                                <p class="pull-right"><span class="thumb glyphicon glyphicon-thumbs-up" width="20" height="20"></span>  <?= count($endorsements); ?></p>
+                                <p class="pull-right"><span class="thumb glyphicon glyphicon-thumbs-up" width="20" height="20" onclick="endorseSkill('<?= $skill['id'] ?>');"></span>  <?= count($endorsements); ?></p>
                             <?php } ?> 
                             <div class="clearfix"></div>
                         </div>
