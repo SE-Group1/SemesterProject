@@ -5,7 +5,7 @@
         'userId' => getUserId()
     ));
     
-    echo json_encode($result);
+    $connectionList = $result['result'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,69 +15,79 @@
     <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/themes/fusioncharts.theme.fint.js?cacheBust=56"></script>
     <script type="text/javascript">
+    
+    <?php
+        $values = array();
+        $numUsers = count($connectionList);
+        
+        for($i = 0; $i < 10; $i++) {
+            $value = $i < $numUsers ? $connectionList[$i]['numConnections'] : 0;
+            array_push($values, $value);
+        }
+    ?>
+    
       FusionCharts.ready(function() {
           var revenueChart = new FusionCharts({
-              type: 'column3d',
+              type: 'column2d',
               renderAt: 'chart-container',
               width: '1000',
               height: '500',
               dataFormat: 'json',
               dataSource: {
                 "chart": {
-                  "caption": "Top Connections",
-                  "subCaption": "on HookedUp",
-                  "xAxisName": "Names",
-                  "yAxisName": "Connections",
-                  "paletteColors": "#0075c2",
-                  "valueFontColor": "#ffffff",
-                  "baseFont": "Helvetica Neue,Arial",
-                  "captionFontSize": "14",
-                  "subcaptionFontSize": "14",
-                  "subcaptionFontBold": "0",
-                  "placeValuesInside": "1",
-                  "rotateValues": "0",
-                  "showShadow": "1",
-                  "divlineColor": "#999999",
-                  "divLineIsDashed": "1",
-                  "divlineThickness": "1",
-                  "divLineDashLen": "1",
-                  "divLineGapLen": "1",
-                  "canvasBgColor": "#ffffff"
+                  "caption": "Who's HookedUp the most?",
+                  "captionFontSize": "22",
+                  "showBorder": "0",
+                  "bgColor": "#ffffff",
+                  "showCanvasBorder": "0",
+                  "canvasBgColor": "#ffffff",
+                  "paletteColors": "#3399ff",
+                  "usePlotGradientColor": "0",
+                  "plotFillAlpha": "70",
+                  "plotFillHoverAlpha": "40",
+                  "showPlotBorder": "0",
+                  "valueFontSize": "10",
+                  "valueFontBold": "1",
+                  "divLineColor": "#ffffff",
+                  "showAlternateHGridColor": "0",
+                  "logoUrl": "../logo.png",
+                  "logoPosition": "CC",
+                  "logoScale": "150",
+                  "logoAlpha": "02",
+                  "showYAxisValues": "0"
                 },
-                
-              <?php $Bill = "<img src='../companies/papajohns.jpeg'>" ;?>
 
-              "data": [{
-                "label": "<?php echo $Bill?>",
-                "value": "430"    
-              }, {
-                "label": "Bill",
-                "value": "400"
-              }, {
-                "label": "Fred",
-                "value": "392"
-              }, {
-                "label": "Steve",
-                "value": "375"
-              }, {
-                "label": "George",
-                "value": "340"
-              }, {
-                "label": "Julia",
-                "value": "325"
-              }, {
-                "label": "Stephanie",
-                "value": "315"
-              }, {
-                "label": "Gregory",
-                "value": "310"
-              }, {
-                "label": "Silvia",
-                "value": "300"
-              }, {
-                "label": "You",
-                "value": "296"
-              }]
+                "data": [{
+                  "label": "1st",
+                  "value": "<?= $values[0]; ?>"
+                }, {
+                  "label": "2nd",
+                  "value": "<?= $values[1]; ?>"
+                }, {
+                  "label": "3rd",
+                  "value": "<?= $values[2]; ?>"
+                }, {
+                  "label": "4th",
+                  "value": "<?= $values[3]; ?>"
+                }, {
+                  "label": "5th",
+                  "value": "<?= $values[4]; ?>"
+                }, {
+                  "label": "6th",
+                  "value": "<?= $values[5]; ?>"
+                }, {
+                  "label": "7th",
+                  "value": "<?= $values[6]; ?>"
+                }, {
+                  "label": "8th",
+                  "value": "<?= $values[7]; ?>"
+                }, {
+                  "label": "9th",
+                  "value": "<?= $values[8]; ?>"
+                }, {
+                  "label": "10th",
+                  "value": "<?= $values[9]; ?>"
+                }]
             }
         });
         revenueChart.render();
