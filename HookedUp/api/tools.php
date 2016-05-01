@@ -31,6 +31,10 @@ function getSessionId() {
 /**
  * Returns request data that has been scrubbed using htmlspecialchars()
  */
+function getMethod() {
+    return htmlspecialchars($_SERVER['REQUEST_METHOD']);
+}
+
 function getGETSafe($key) {
     $val = htmlspecialchars($_GET[$key]);
     return empty($val) ? NULL : $val;

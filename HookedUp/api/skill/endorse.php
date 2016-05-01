@@ -6,7 +6,6 @@
     
     switch ($method) {
         case 'PUT':
-            //parse_str(file_get_contents('php://input'), $_PUT);
             
             $userId = getPUTSafe('userId');
             $skillId = getPUTSafe('skillId');

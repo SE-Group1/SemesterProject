@@ -1,5 +1,11 @@
 <?php require '../tools.php'; 
-  requireLoggedIn();
+    requireLoggedIn();
+    
+    $result = makeAPIRequest("/api/user/connectionlist/", "GET", array(
+        'userId' => getUserId()
+    ));
+    
+    echo json_encode($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
