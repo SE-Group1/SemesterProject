@@ -43,6 +43,9 @@
         margin: 0px;
         padding: 0px;
     }
+    ul.nav li.dropdown:hover > ul.dropdown-menu {
+        display: block;
+    }
 </style>
 
 <script>

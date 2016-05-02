@@ -7,7 +7,7 @@
     <ul class="nav navbar-nav">
       <?php if($loggedIn) { ?>
         <li><a href="<?= $baseUrl ?>companies/company.php">Companies</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<?= $baseUrl ?>connections/">Connections<span class="caret"></span></a>
+        <li class="dropdown"><a href="<?= $baseUrl ?>connections/">Connections<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?= $baseUrl ?>connections/">My Connections</a></li>
             <li><a href="<?= $baseUrl ?>connections/visual.php">Comparison</a></li>
