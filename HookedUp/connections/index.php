@@ -1,7 +1,7 @@
 <?php require '../tools.php'; 
     requireLoggedIn();
     
-    $result = makeAPIRequest("/api/user/connectionList/", "GET", array(
+    $result = makeAPIRequest("/api/user/connectionlist/", "GET", array(
         'userId' => getUserId()
     ));
     
