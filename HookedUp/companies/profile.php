@@ -2,26 +2,26 @@
     
     requireLoggedIn();
     
+    //Get company
     $result = makeAPIRequest("/api/company/index.php", "GET", array(
         'id' => 'Company-1'
     ));
     
     $company = $result['result'][0];
-    //echo json_encode($company);
     
+    //Get employees
     $result = makeAPIRequest("/api/company/employees/index.php", "GET", array(
         'companyId' => 'Company-1'
     ));
     
     $employees = $result['result'];
-    //echo json_encode($employees);
     
-    $reuslt = makeAPIRequest("/api/company/post.php", "GET", array(
+    //Get posts
+    $result = makeAPIRequest("/api/company/post.php", "GET", array(
         'companyId' => 'Company-1'
     ));
     
     $posts = $result['result'];
-    //echo json_encode($posts);  
 ?>
 
 <!DOCTYPE html>

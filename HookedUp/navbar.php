@@ -6,11 +6,20 @@
     </div>
     <ul class="nav navbar-nav">
       <?php if($loggedIn) { ?>
-        <li><a href="<?= $baseUrl ?>companies/company.php">Companies</a></li>
+        
+        <!-- Connections dropdown -->
         <li class="dropdown"><a href="<?= $baseUrl ?>connections/">Connections<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<?= $baseUrl ?>connections/">My Connections</a></li>
             <li><a href="<?= $baseUrl ?>connections/visual.php">Comparison</a></li>
+          </ul>
+        </li>
+      
+        <!-- Companies dropdown -->
+        <li class="dropdown"><a href="<?= $baseUrl ?>companies/">Companies<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?= $baseUrl ?>companies/">Following</a></li>
+            <li><a href="<?= $baseUrl ?>companies/create.php">Create a company</a></li>
           </ul>
         </li>
 
