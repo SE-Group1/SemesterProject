@@ -26,16 +26,6 @@
             height:120px;
             padding:10px; 
         }
-        .card-title {
-            font-size: large;
-        }
-        
-        .employ {
-            height: 100px;
-            width: 100px;
-            float: left;
-            margin-right: 10px;
-        }
     </style>
 </head>
 <body>
@@ -61,24 +51,14 @@
             
             $users = $result['result']['users'];
             
-            foreach ($users as $user) {
+            foreach ($users as $user) { 
                 
-                $titles = $user['titles'];
-                $titleText = "";
-                for ($i = 0; isset($titles) && $i < count($titles); $i++) {
-                    $titleText .= ($i == 0 ? '' : ', ') . $titles[$i];
-                } ?>
-                <div class="card shadow">
-                    <div><img src="<?= getImageUrl($user['profileImageId']); ?>" class="employ img-thumbnail"></div>
-                    <div>
-                        <div class="name"><h4><b><a href="<?= getClientUrl() . "profile/?id=" . $user['id']; ?>"><?= $user['firstName'] . " " . $user['lastName']; ?></a></b></h4></div>
-                        <div class="name text-muted"><h6><i><?= $titleText ?></i></h6></div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            <?php }
+                echo makeTemplateRequest("/user-card.php", "GET", array(
+                    'userId' => $user['id']
+                ));
+            }
             
-            $companies = $result['result']['companies'];
+            /*$companies = $result['result']['companies'];
             foreach ($companies as $company) { ?>
                 <div id="section">  
                 <div class="col-lg-2"><br><img src="<?= getImageUrl($company['profileImageId']); ?>" width="100" height="100"></div> 
@@ -86,8 +66,8 @@
                 <div><h4><?= $company['name']?></h4></div>
                 <button type="button" class="btn btn-success" onClick='/company'>View</button>     
             </div> 
-            <?php } ?>
-        <?php } ?>
+            <?php } ?>*/
+         } ?>
     </div>
 </div>
     

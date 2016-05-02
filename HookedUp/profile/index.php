@@ -16,7 +16,6 @@
     ));
     
     $skills = $result['result'];
-    //echo json_encode($skills);
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,11 +25,15 @@
         #header {
             margin-bottom: 15px;
         }
-        
         #profileImage {
             margin-right: 15px;
         }
-        
+        #left-column {
+            padding: 0 15px 0 0;
+        }
+        #right-column {
+            padding: 0 0 0 15px;
+        }
         #experience {
             background-color:white;
             overflow-y: scroll;
@@ -38,21 +41,18 @@
             height: 300px;
             margin-bottom: 15px;
         }
-        
         .employ {
             height: 100px;
             width: 100px;
             float: left;
             margin: 10px;
         }
-        
         .users {
             height: 100px;
             width: 100px;
             float: left;
             margin: 10px;
         }
-        
         .thumb:hover {
            color: dodgerblue;
         }
@@ -91,22 +91,24 @@
                 </div>
             </div>
             <div>
-                <div class="col-md-2 card shadow">
-                    <h2>Skills</h2>
-                    <?php foreach ($skills as $skill)  { ?>
-                        <div>
-                            <p class="pull-left"><?= $skill['name']; ?></p>
-                            
-                            <?php $endorsements = $skill['endorsements'];
-                            if(isset($endorsements) && count($endorsements) > 0) { ?>
-                                <p class="pull-right"><span class="thumb glyphicon glyphicon-thumbs-up" width="20" height="20" onclick="endorseSkill('<?= $skill['id'] ?>');"></span>  <?= count($endorsements); ?></p>
-                            <?php } ?> 
-                            <div class="clearfix"></div>
-                        </div>
-                    <?php } ?>
+                <div id="left-column" class="col-md-2">
+                    <div class="card shadow">
+                        <h2>Skills</h2>
+                        <?php foreach ($skills as $skill)  { ?>
+                            <div>
+                                <p class="pull-left"><?= $skill['name']; ?></p>
+                                
+                                <?php $endorsements = $skill['endorsements'];
+                                if(isset($endorsements) && count($endorsements) > 0) { ?>
+                                    <p class="pull-right"><span class="thumb glyphicon glyphicon-thumbs-up" width="20" height="20" onclick="endorseSkill('<?= $skill['id'] ?>');"></span>  <?= count($endorsements); ?></p>
+                                <?php } ?> 
+                                <div class="clearfix"></div>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
                 
-                <div class="col-md-8">
+                <div class="col-md-8 no-padding">
                     <div id="experience" class="card shadow">
                         <h2>Past Experience</h2>
                         <?php 
@@ -134,8 +136,12 @@
                 </div>
                 <!-- col-md-8 div-->
                 
-                <div class="col-md-2 card shadow" height="200px">
-                    
+                <div id="right-column" class="col-md-2">
+                    <?php if(isUser($userId)) { ?>
+                        <div class="card shadow">
+                            <a href="../connections/visual.php">See how you compare to your friends</a>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

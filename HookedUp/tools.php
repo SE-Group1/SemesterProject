@@ -120,6 +120,11 @@ function isUser($userId) {
      return makeJSONRequest($url, $method, $data);
  }
  
+ function makeTemplateRequest($urlPart, $method, array $data = array()) {
+     $url = getAPIUrl() . "/templates" . $urlPart;
+     return makeRequest($url, $method, $data);
+ }
+ 
  function makeJSONRequest($url, $method, array $data = array()) {
      $result = makeRequest($url, $method, $data);
      return json_decode($result, true);

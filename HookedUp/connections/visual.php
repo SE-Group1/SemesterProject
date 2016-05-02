@@ -1,7 +1,7 @@
 <?php require '../tools.php'; 
     requireLoggedIn();
     
-    $result = makeAPIRequest("/api/user/connectionlist/", "GET", array(
+    $result = makeAPIRequest("/api/user/connectiongraph/", "GET", array(
         'userId' => getUserId()
     ));
     
@@ -11,7 +11,6 @@
 <html lang="en">
 <head>
     <?php require '../links.php'; ?>
-    <title>My first chart using FusionCharts Suite XT</title>
     <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/themes/fusioncharts.theme.fint.js?cacheBust=56"></script>
     <script type="text/javascript">

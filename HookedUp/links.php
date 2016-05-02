@@ -12,11 +12,23 @@
     hr {
         border-color: #aaa; 
     }
+    .page-title {
+        margin-bottom: 30px;
+    }
     .card {
         background-color: white;
         border-color: #ddd;
         border-radius: 1px;
         padding: 15px;
+    }
+    .card-image {
+        height: 100px;
+        width: 100px;
+        float: left;
+        margin-right: 10px;
+    }
+    .card-title {
+        font-size: large;
     }
     .shadow {
         box-shadow: 0px 2px 4px #999;

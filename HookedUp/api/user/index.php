@@ -25,6 +25,13 @@
             
             $user['employments'] = $employments;
             
+            $titles = array();
+            foreach($employments as $employment) {
+                array_push($titles, $employment['title']);
+            }
+            
+            $user['titles'] = $titles;
+            
             success($user);
     
             break;
