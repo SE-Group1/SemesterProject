@@ -11,13 +11,11 @@
 <html lang="en">
 <head>
     <?php require '../links.php'; ?>
-    
-  </script>
 </head>
 <body>
     <?php require '../navbar.php';?>
     <div class="col-md-6 col-md-offset-3">
-        <div class="text-center page-title"><center><h3>Your Connections</h3></center></div>
+        <h2 class="page-title text-center">Your Connections</h2>
         <?php foreach ($connectionList as $connection) {
             
             echo makeTemplateRequest("/user-card.php", "GET", array(

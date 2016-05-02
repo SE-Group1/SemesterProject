@@ -13,7 +13,7 @@
         border-color: #aaa; 
     }
     .page-title {
-        margin-bottom: 30px;
+        margin: 15px 0 30px 0;
     }
     .card {
         background-color: white;

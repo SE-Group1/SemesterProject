@@ -34,7 +34,6 @@
               dataFormat: 'json',
               dataSource: {
                 "chart": {
-                  "caption": "Who's HookedUp the most?",
                   "captionFontSize": "22",
                   "showBorder": "0",
                   "bgColor": "#ffffff",
@@ -95,6 +94,9 @@
 </head>
 <body>
     <?php require '../navbar.php';?>
-  <div id="chart-container" align="center">FusionCharts XT will load here!</div>
+    <div class="col-md-12">
+        <h2 class="page-title text-center">Who's HookedUp the most?</h2>
+        <div id="chart-container" align="center"></div>
+    </div>
 </body>
 </html>

@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="text-center"><center><h3>Search Results</h3></center></div>
+        <h2 class="page-title text-center">Search Results</h2>
         <?php 
         if(isset($filter)) {
             $result = makeAPIRequest("api/search/index.php", "GET", array(

@@ -7,7 +7,12 @@
     <ul class="nav navbar-nav">
       <?php if($loggedIn) { ?>
         <li><a href="<?= $baseUrl ?>companies/company.php">Companies</a></li>
-        <li><a href="<?= $baseUrl ?>connections/">Connections</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<?= $baseUrl ?>connections/">Connections<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?= $baseUrl ?>connections/">My Connections</a></li>
+            <li><a href="<?= $baseUrl ?>connections/visual.php">Comparison</a></li>
+          </ul>
+        </li>
 
         <!-- Search bar -->
         <div class="pull-left">
@@ -20,14 +25,6 @@
             </div>
           </form>
         </div>
-        
-        <!--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Page 1-1</a></li>
-            <li><a href="#">Page 1-2</a></li>
-            <li><a href="#">Page 1-3</a></li>
-          </ul>
-        </li>-->
       <?php } ?>
     </ul>
 
