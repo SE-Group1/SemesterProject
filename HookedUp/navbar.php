@@ -1,5 +1,5 @@
 <?php $baseUrl = getClientUrl(); ?>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" style="border-radius:0px">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="<?= $baseUrl ?>index.php"><img src="<?= $baseUrl ?>logo_white.png" width="112" height="30"></a>
