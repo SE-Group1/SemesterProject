@@ -18,7 +18,7 @@
         <h2 class="page-title text-center">Your Connections</h2>
         <?php foreach ($connectionList as $connection) {
             
-            echo makeTemplateRequest("/user-card.php", "GET", array(
+            echo makeTemplateRequest("/user-card/", "GET", array(
                 'userId' => $connection['id']
             ));
         } ?>

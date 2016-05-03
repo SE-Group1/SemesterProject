@@ -50,23 +50,20 @@
             ));
             
             $users = $result['result']['users'];
-            
             foreach ($users as $user) { 
                 
-                echo makeTemplateRequest("/user-card.php", "GET", array(
+                echo makeTemplateRequest("/user-card/", "GET", array(
                     'userId' => $user['id']
                 ));
             }
             
-            /*$companies = $result['result']['companies'];
-            foreach ($companies as $company) { ?>
-                <div id="section">  
-                <div class="col-lg-2"><br><img src="<?= getImageUrl($company['profileImageId']); ?>" width="100" height="100"></div> 
-                <div><h4>Profile Type: Company</h4></div>   
-                <div><h4><?= $company['name']?></h4></div>
-                <button type="button" class="btn btn-success" onClick='/company'>View</button>     
-            </div> 
-            <?php } ?>*/
+            $companies = $result['result']['companies'];
+            foreach ($companies as $company) {
+            
+                echo makeTemplateRequest("/company-card/", "GET", array(
+                    'companyId' => $company['id']
+                ));
+            }
          } ?>
     </div>
 </div>

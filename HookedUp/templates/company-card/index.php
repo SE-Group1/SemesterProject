@@ -1,4 +1,4 @@
-<?php require'../tools.php';
+<?php require'../../tools.php';
     requireLoggedIn();
     
     $companyId = getGETSafe('companyId');

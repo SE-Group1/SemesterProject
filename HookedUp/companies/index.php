@@ -18,7 +18,7 @@
         <h2 class="page-title text-center">Companies you are Following</h2>
         <?php foreach ($companyList as $company) {
             
-            echo makeTemplateRequest("/company-card.php", "GET", array(
+            echo makeTemplateRequest("/company-card/", "GET", array(
                 'companyId' => $company['id']
             ));
         } ?>
