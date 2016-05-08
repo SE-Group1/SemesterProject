@@ -17,6 +17,13 @@
     
     $skills = $result['result'];
     
+    //Get employments
+    $result = makeAPIRequest("api/user/employments/", "GET", array(
+        'userId' => $userId
+    ));
+    
+    $employments = $result['result'];
+    
     //Get posts
     $result = makeAPIRequest("api/user/posts/", "GET", array(
         'userId' => $userId
@@ -111,15 +118,12 @@
                 <div class="col-md-8 no-padding">
                     <div id="experience" class="card shadow">
                         <h2>Past Experience</h2>
-                        <?php 
-                            for($i=0; $i < 5; $i++) { ?>
-                            <div><img src="apple.jpg" class="employ img-thumbnail"></div>
-                            <div>
-                                <div class="name"><h4><b>Apple</b></h4></div>
-                                <div class="name"><h5><b>Mac'in on Mac's</b></h5></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        <?php } ?>
+                        
+                        <?php foreach($employments as $employment) {
+                            echo makeTemplateRequest("/company-card/", "GET", array(
+                                'companyId' => $employment['companyId']
+                            ));
+                        } ?>
                     </div>
                     <!-- End employees div-->
                     
