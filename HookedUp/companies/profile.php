@@ -1,24 +1,25 @@
 <?php require '../tools.php';
-    
     requireLoggedIn();
+    
+    $companyId = getGETSafe('id');
     
     //Get company
     $result = makeAPIRequest("/api/company/index.php", "GET", array(
-        'id' => 'Company-1'
+        'id' => $companyId
     ));
     
-    $company = $result['result'][0];
+    $company = $result['result'];
     
     //Get employees
     $result = makeAPIRequest("/api/company/employees/index.php", "GET", array(
-        'companyId' => 'Company-1'
+        'companyId' => $companyId
     ));
     
     $employees = $result['result'];
     
     //Get posts
-    $result = makeAPIRequest("/api/company/post.php", "GET", array(
-        'companyId' => 'Company-1'
+    $result = makeAPIRequest("/api/company/posts/", "GET", array(
+        'companyId' => $companyId
     ));
     
     $posts = $result['result'];
@@ -29,148 +30,87 @@
 <head> 
     <?php require '../links.php'; ?>
     <style>
-        h2 {
-            text-align: center;
-            padding: 10px;
-            margin: 10px;
-            
+        #header {
+            margin-bottom: 15px;
         }
-        
-        hr {
-            size: 3px;
+        #profileImage {
+            margin-right: 15px;
         }
-        
-        .row1 {
+        #left-column {
+            padding: 0 15px 0 0;
+        }
+        #right-column {
+            padding: 0 0 0 15px;
+        }
+        #experience {
             background-color:white;
-            padding: 10px;
-            
-        }
-        
-        #employees {
-            background-color:white;
-            padding: 10px;
-            margin: 10px;
             overflow-y: scroll;
             overflow-x: hidden;
             height: 300px;
+            margin-bottom: 15px;
         }
-        
         .employ {
             height: 100px;
             width: 100px;
             float: left;
-            margin-right: 10px;
+            margin: 10px;
         }
-        
-        .companies {
+        .users {
             height: 100px;
             width: 100px;
             float: left;
             margin: 10px;
         }
-        
-        .recent_posts {
-            background-color: white;
+        .thumb:hover {
+           color: dodgerblue;
         }
-        
-        #company {
-            float: left;
-        }
-        
-        .similar {
-            padding:10px;
-        }
-        
-        .postpic {
-            max-height: 150px;
-            max-width: 150px;
-        }  
     </style>
 </head>
 <body>
     <?php require '../navbar.php'; ?>
     <div id="container">
-        <div class="col-md-3" >
-            <img src="papajohns.jpeg" class="img-thumbnail">
-            <h2>Similar Companies</h2>
-            <div class="row1">
-                <?php for($i=1; $i <=5; $i++)  { ?>
-                    <img src="company.jpeg" class="img-thumbnail companies">
-                    <?php echo "<h5 class='similar'> Company ".$i."</h5>"; ?>
+        <div class="col-md-10 col-md-offset-1">
+            <div id="header">
+                <div class="card shadow comp">
+                    <div id="profileImage" class="pull-left"><img class="img-thumbnail" src="<?= getImageUrl($company['profileImageId']); ?>" width="150" height="150"></div>
+                    <h1 class="no-spacing"><?= $company['name']; ?></h1>
+                    <div class="location">
+                        <div>1835 73rd Ave</div>
+                        <div>Medina, Washington 12345</div>
+                    </div>
                     <div class="clearfix"></div>
-                    <hr>
-                
-                <?php } ?>
-                
-            </div>
-        </div>
-            <div class="col-md-9 row1 comp">
-                <h2 id="company"><?= $company['name']; ?></h2>
-                <div class="clearfix"></div>
-                <div class="location">
-                    <div>401 East West Blvd</div>
-                    <div>Columbia Missouri, 65203</div>
-            </div>
-                    
-            </div>
-        
-            
-            <div class="col-md-3 similar">
-            </div>
-            
-            <div class="col-md-9">
-                <div id="employees">
-                    <h2>Current Employees</h2>
-                    <div class="col-md-6">
-                        <?php 
-                            foreach($employees as $employee) { 
-                                $user=$employee['user'];?>
-                                
-                            <div><img src="dt.jpeg" class="employ img-thumbnail"></div>
-                            <div>
-                                <div class="name"><h4><b><?php echo $user['firstName']; echo " " . $user['lastName']?></b></h4></div>
-                                <div class="name"><h5><b><?php echo $employee['title']?></b></h5></div>
-                                <div class="name"><h5><b><?php echo $user['email']?></b></h5></div>
-                            </div>
-                            <div class="clearfix"></div>
-                            
-                        <?php } ?>
-                    </div>
-                    
-                        <div class="col-md-6">
-                        <?php 
-                            for($i=0; $i < 5; $i++) { ?>
-                            <div><img src="kp.jpeg" class="employ img-thumbnail"></div>
-                            <div class="name"><h4><b>Katy Perry</b></h4></div>
-                            <div class="clearfix"></div>
-                            
-                        <?php }
-                        ?>
-                    </div>
-                    
-                    
-                </div> <!-- End employees div-->
-                
-                <div class = "recent_posts">
-                    <h2>Recent Posts</h2>
-                    <hr>
-                    
-                    <?php
-                        foreach($posts as $post) { ?>
-                            <div><img src="Papajohns.jpeg" class="col-md-4 img-thumbnail postpic" >
-                            <div class="col-md-6"><?php echo $post['comment'] ?> </div>
-                            <div class="name"><h5><b><?php echo $post['createdAt']?></b></h5></div>
-                            <div class='clearfix'></div>
-                            </div><hr>
-                        <?php }
-                    ?>   
-                    
                 </div>
             </div>
-
-        
-        <!-- col-md-3 div-->
+            <div>
+                <div id="left-column" class="col-md-2">
+                    <div class="card shadow" height="200">
+                        <h2>Similar</h2>
+                    </div>
+                </div>
+                
+                <div class="col-md-8 no-padding">
+                    <div id="experience" class="card shadow">
+                        <h2>Employees</h2>
+                    </div>
+                    <!-- End employees div-->
+                    
+                    <div class="card shadow">
+                        <h2>Recent Posts</h2><hr>
+                        
+                        <?php foreach ($posts as $post) {
+                            echo makeTemplateRequest("/post-card/", "GET", array(
+                                'postId' => $post['id']
+                            ));
+                        } ?>
+                    </div>
+                </div>
+                <!-- col-md-8 div-->
+                
+                <div id="right-column" class="col-md-2">
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- end Container div-->     
+    <!-- end Container div--> 
 </body>
 </html>
