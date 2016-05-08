@@ -54,7 +54,7 @@
           "paletteColors": "#3399ff",
           "usePlotGradientColor": "0",
           "plotFillAlpha": "70",
-          "plotFillHoverAlpha": "40",
+          //"plotFillHoverAlpha": "40",
           "showPlotBorder": "0",
           "valueFontSize": "10",
           "valueFontBold": "1",
@@ -71,15 +71,13 @@
             "width": "500",
             "height": "300",
             "autoScale": "1",
-            "groups": [
-                {
-                    "id": "user-images",
-                    "xScale_": "20",
-                    "yScale_": "20",
-                    "showBelow": "0",
-                    "items": <?= json_encode($annotationItems); ?>
-                }
-            ]
+            "groups": [{
+                "id": "user-images",
+                "xScale_": "20",
+                "yScale_": "20",
+                "showBelow": "0",
+                "items": <?= json_encode($annotationItems); ?>
+            }]
         },
 
         "data": [{
@@ -124,7 +122,12 @@
               width: '1000',
               height: '500',
               dataFormat: 'json',
-              dataSource: dataSource
+              dataSource: dataSource,
+              "events": {
+                  "annotationClick": function(evtObj, argObj) {
+                      alert("boop");
+                  }
+              }
         });
         revenueChart.render();
     });
