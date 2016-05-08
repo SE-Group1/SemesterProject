@@ -16,6 +16,13 @@
     ));
     
     $skills = $result['result'];
+    
+    //Get posts
+    $result = makeAPIRequest("api/user/posts/", "GET", array(
+        'userId' => $userId
+    ));
+    
+    $posts = $result['result'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,13 +66,6 @@
     </style>
     <script>
         function endorseSkill(skillId) {
-            // makeAPIRequest("/api/skill/endorse.php", "PUT", {
-            //     "userId": "<?= getUserId(); ?>",
-            //     "skillId": skillId
-            // }, 
-            // function(data) {
-            //    console.log(data); 
-            // });
             makeAPIRequest("/api/skill/endorse.php", "PUT", {
                 "userId": "<?= getUserId(); ?>",
                 "skillId": skillId
@@ -126,12 +126,11 @@
                     <div class="card shadow">
                         <h2>Recent Posts</h2><hr>
                         
-                        <?php for($i=0; $i < 10; $i++) { ?>
-                            <div><img src="company.jpeg" class="col-md-4" class="column">
-                            <div class="col-md-6" class="column"> Lorem ipsum dolor sit amet, aenean porta nec velit, lectus posuere, tortor quamt fasdjlskfjas a kgjasdl ajsflaksd fkj lkjf asdlfjas fsjf  sdfkjasf asfjijfaslkfj skfjsdf sdjf lkdjfasd flkajf </div>
-                            <div class='clearfix'></div>
-                            </div><hr>
-                        <?php } ?>
+                        <?php foreach ($posts as $post) {
+                            echo makeTemplateRequest("/post-card/", "GET", array(
+                                'postId' => $post['id']
+                            ));
+                        } ?>
                     </div>
                 </div>
                 <!-- col-md-8 div-->
