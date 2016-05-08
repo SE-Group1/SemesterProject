@@ -14,11 +14,8 @@
 <?php require 'navbar.php'; ?>
 
 <div class="container">
-    <p id="result">
-    </p>
-    <div class = "recent_posts">
-        <h2>Recent Posts</h2>
-        <hr>
+    <div class="col-md-8 col-md-offset-2">
+        <div><h2>Recent Posts</h2></div>
         
         <?php foreach($posts as $post) { 
             echo makeTemplateRequest("/post-card/", "GET", array(
