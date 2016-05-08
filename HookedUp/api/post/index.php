@@ -16,6 +16,20 @@
                 failure("No post for id: ".$id);
             }
             
+            $query = "SELECT ".userProperties()." FROM user WHERE id=?";
+            $users = exec_stmt($query, "s", $post['originUserId']);
+            if ($user = reset($users)) {
+                $post['posterProfileImageId'] = $user['profileImageId'];
+                $post['posterName'] = $user['firstName'] . " " . $user['lastName'];
+            }
+            
+            $query = "SELECT ".companyProperties()." FROM company WHERE id=?";
+            $companies = exec_stmt($query, "s", $post['originCompanyId']);
+            if ($company = reset($companies)) {
+                $post['posterProfileImageId'] = $company['profileImageId'];
+                $post['posterName'] = $company['name'];
+            }
+            
             $query = "SELECT * FROM postLike WHERE postId = ?";
             $postLikes = exec_stmt($query, "s", $id);
             $post['numberOfLikes'] = count($postLikes);
