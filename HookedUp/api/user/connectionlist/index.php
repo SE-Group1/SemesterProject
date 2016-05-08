@@ -13,8 +13,10 @@
             $users = array();
             foreach ($results as $row) {
                 $friendId = $row['originUserId'] === $userId ? $row['destinationUserId'] : $row['originUserId'];
+                
                 $query = "SELECT ".userProperties()." FROM user WHERE id = ?";
                 $result = exec_stmt($query, "s", $friendId);
+                
                 if($result !== false) {
                     array_push($users, $result[0]);
                 }
