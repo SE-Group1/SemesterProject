@@ -91,6 +91,12 @@
                 <div class="col-md-8 no-padding">
                     <div id="experience" class="card shadow">
                         <h2>Employees</h2>
+                        
+                        <?php foreach ($employees as $employee) {
+                            echo makeTemplateRequest('/user-card/', "GET", array(
+                                'userId' => $employee['user']['id']
+                            ));
+                        } ?>
                     </div>
                     <!-- End employees div-->
                     
